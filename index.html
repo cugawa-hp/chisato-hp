@@ -784,6 +784,10 @@ section.bg-sky{
   height:auto;
   object-fit:contain;
 }
+/* ---- 提携先ロゴサイズ調整場所 ----
+   オリックス生命・東京海上日動あんしん生命のロゴは画像内の余白が広く小さく見えるため、
+   縦横比は保ったまま表示サイズのみ拡大しています。 */
+.partner-card img.logo-lg{max-height:58px;}
 .partner-card span{font-size:11.5px;font-weight:600;color:var(--text-sub);line-height:1.5;text-align:center;}
 
 /* ============================================================
@@ -961,9 +965,9 @@ section.bg-sky{
 }
 .flow-connector svg{width:20px;height:20px;}
 
-/* ---- 強引な勧誘なし表示変更場所 ----
-   3項目を横並びのアイコン＋文章ではなく、アイコンを上・文章を下にした縦配置にし、
-   スマホでも文字が自然に収まるようにしています。3項目自体も横並びグリッドではなく縦方向に並べています。 */
+/* ---- 強引な勧誘なし表示変更場所／提携先ロゴサイズ調整と同じ配置調整の一環 ----
+   3項目を横並びのアイコン＋文章ではなく、アイコンを上・文章を下にした縦配置にしています。
+   スマホでは3項目を縦に並べ、900px以上（PC）では3列均等グリッドにして高さを揃えています。 */
 .promise-band{
   display:flex;
   flex-direction:column;
@@ -984,6 +988,14 @@ section.bg-sky{
 }
 .promise-mini h4{font-size:15px;font-weight:700;line-height:1.5;color:var(--navy);margin-bottom:2px;}
 .promise-mini p{font-size:12.5px;color:var(--text-sub);line-height:1.7;}
+.icon-badge-img{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  overflow:hidden;
+  flex-shrink:0;
+}
+.icon-badge-img img{width:100%;height:100%;object-fit:cover;}
 
 /* ============================================================
    7. お問い合わせ
@@ -1006,20 +1018,22 @@ section.bg-sky{
   background:radial-gradient(circle,rgba(255,255,255,0.12),transparent 70%);
 }
 /* ---- LINEメッセージ文字サイズ調整場所 ----
-   スマホで自然に収まるよう、文字サイズを縮小し行間・改行を調整しています。 */
+   スマホで大きくなりすぎないよう文字サイズを抑え、行間・余白を調整して
+   読みやすく安心感のあるバランスにしています。 */
 .contact-cta-box h3{
-  font-size:15px;
-  line-height:1.6;
+  font-size:14px;
+  line-height:1.65;
   color:#fff;
   text-align:center;
-  margin-bottom:8px;
+  margin-bottom:9px;
   position:relative;
 }
 .contact-cta-box .cta-sub{
   text-align:center;
-  font-size:12.5px;
+  font-size:12px;
+  line-height:1.6;
   color:#b9cadb;
-  margin-bottom:22px;
+  margin-bottom:24px;
   position:relative;
 }
 
@@ -1185,6 +1199,16 @@ section.bg-sky{
   .header-actions{display:flex;}
   .logo img.logo-img{height:34px;}
   .partners-grid{grid-template-columns:repeat(4,1fr);}
+
+  /* ---- 強引な勧誘なし配置調整場所：PCでは3項目を均等な横並び3列にし、高さを揃える ---- */
+  .promise-band{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    max-width:900px;
+    align-items:stretch;
+  }
+  .promise-mini{height:100%;justify-content:flex-start;}
 
   .hero-inner{padding-top:150px;padding-bottom:110px;}
   .hero h1{font-size:48px;}
@@ -1539,9 +1563,9 @@ section.bg-sky{
 
       <!-- 提携先ロゴ表示場所：会社名テキストから、各社ロゴ画像（images/フォルダ内）を使ったカード表示に変更 -->
       <div class="partners-grid">
-        <div class="partner-card"><img src="images/orix.jpeg" alt="オリックス生命"><span>オリックス生命</span></div>
+        <div class="partner-card"><img class="logo-lg" src="images/orix.jpeg" alt="オリックス生命"><span>オリックス生命</span></div>
         <div class="partner-card"><img src="images/sompo.jpeg" alt="ＳＯＭＰＯひまわり生命"><span>ＳＯＭＰＯひまわり生命</span></div>
-        <div class="partner-card"><img src="images/tokyokaijo.jpg" alt="東京海上日動／東京海上日動あんしん生命"><span>東京海上日動／東京海上日動あんしん生命</span></div>
+        <div class="partner-card"><img class="logo-lg" src="images/tokyokaijo.jpg" alt="東京海上日動／東京海上日動あんしん生命"><span>東京海上日動／東京海上日動あんしん生命</span></div>
         <div class="partner-card"><img src="images/nissei.jpeg" alt="日本生命保険相互会社"><span>日本生命保険相互会社</span></div>
         <div class="partner-card"><img src="images/hanasaku.jpeg" alt="はなさく生命保険"><span>はなさく生命保険</span></div>
         <div class="partner-card"><img src="images/daiichi.jpg" alt="第一ネオ生命保険株式会社"><span>第一ネオ生命保険株式会社</span></div>
@@ -1549,6 +1573,7 @@ section.bg-sky{
         <div class="partner-card"><img src="images/zurich.jpeg" alt="チューリッヒ生命"><span>チューリッヒ生命</span></div>
         <div class="partner-card"><img src="images/aioi.jpeg" alt="あいおいニッセイ同和損保"><span>あいおいニッセイ同和損保</span></div>
         <div class="partner-card"><img src="images/aioilife.jpeg" alt="三井住友海上あいおい生命"><span>三井住友海上あいおい生命</span></div>
+        <!-- アクサ生命ロゴ修正場所：黒い外枠のない修正版ロゴ（images/axalife.jpeg）に差し替え -->
         <div class="partner-card"><img src="images/axalife.jpeg" alt="アクサ生命保険株式会社"><span>アクサ生命保険株式会社</span></div>
         <div class="partner-card"><img src="images/axa.jpeg" alt="アクサダイレクト"><span>アクサダイレクト</span></div>
       </div>
@@ -1699,31 +1724,32 @@ section.bg-sky{
 
       <div class="contact-layout">
         <div>
-          <!-- 優先度の高いCTA：LINE最優先 → 電話 → メール -->
+          <!-- LINE相談案内変更場所：相談方法3項目のテキストを簡潔化（返信目安の記載を削除、電話受付時間を17:00までに変更） -->
           <div class="contact-cta-box">
             <h3>LINEなら、<br>最短で気軽に相談できます</h3>
             <p class="cta-sub">友だち追加後、そのままチャット形式でご相談いただけます</p>
             <div class="cta-group" style="flex-direction:column;">
               <a href="#" data-contact="line" class="btn btn-line">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.94 2 10.7c0 3.02 1.86 5.68 4.66 7.24-.15.6-.86 3.3-.9 3.5 0 0-.02.15.08.2.1.06.22.02.22.02.3-.04 3.36-2.2 3.9-2.57.65.1 1.34.15 2.04.15 5.52 0 10-3.94 10-8.7S17.52 2 12 2z"/></svg>
-                ①LINEで相談する（返信目安：当日〜翌営業日）
+                ① LINEで相談する
               </a>
               <a href="#" data-contact="tel" class="btn btn-tel" style="background:transparent;color:#fff;border-color:rgba(255,255,255,0.5);">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
-                ②電話で相談する（受付：平日9:00〜18:00）
+                ② 電話で相談する（受付：平日9:00〜17:00）
               </a>
               <a href="#" data-contact="mail" class="btn btn-primary">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-                ③メールで問い合わせる
+                ③ メールで問い合わせる
               </a>
             </div>
           </div>
 
-          <!-- 強引な勧誘なし表示変更場所：3項目とも「アイコン→タイトル→説明文」の縦配置 -->
+          <!-- 強引な勧誘画像変更場所：アイコン→タイトル→説明文の縦配置は維持しつつ、
+               「強引な勧誘はいたしません」のみアイコンSVGから画像（images/promise-no-pressure-icon.jpg）に変更 -->
           <div class="promise-band">
             <div class="promise-mini">
-              <div class="icon-badge gold" style="width:48px;height:48px;">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8l-8.5 8.5L4 12"/></svg>
+              <div class="icon-badge-img">
+                <img src="images/promise-no-pressure-icon.jpg" alt="強引な勧誘はいたしません">
               </div>
               <h4>強引な勧誘は<br>いたしません</h4>
               <p>ご自身のペースでご検討いただけます。</p>
