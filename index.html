@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ============================================================
+     SEO設定（title / description / OGP はここでまとめて編集できます）
+============================================================ -->
+<title>株式会社SAKIMORI｜人生と未来のお金の相談パートナー</title>
+<meta name="description" content="株式会社SAKIMORIは、元自衛官の代表・渡辺琢哉が一人ひとりの人生設計に寄り添う、保険・資産運用・ライフプランの相談パートナーです。将来のお金の不安を、信頼できる専門家と一緒に整理しませんか。">
+<meta name="robots" content="index,follow">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="株式会社SAKIMORI｜人生と未来のお金の相談パートナー">
+<meta property="og:description" content="元自衛官の代表が、一人ひとりの人生設計から逆算した資産運用・保険のご提案を行う金融相談窓口です。">
+<meta property="og:image" content="images/og-image.jpg"><!-- OGP画像差替え場所（推奨1200×630px） -->
+<meta property="og:url" content="https://sakimori.co.jp/">
+<meta property="og:site_name" content="株式会社SAKIMORI">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:,"><!-- ファビコン差替え場所（favicon.ico 等を用意して差し替え） -->
+
+<style>
+/* ============================================================
+   カラー変数・共通設定
+   ブランドカラーはここでまとめて管理しています。
+   「爽やか・清潔・親しみやすい」を軸に、水色（メイン）× 白（ベース）を基調とし、
+   ネイビーは信頼感を出したい箇所にだけ部分的に使うアクセントカラーとしています。
+============================================================ */
+:root{
+  --primary:#3BA7D8;       /* メインカラー：爽やかなブルー */
+  --primary-light:#5FBCE5; /* プライマリの明るいトーン（グラデーション・ホバー用） */
+  --primary-dark:#1a7aad;  /* プライマリの濃いトーン（白文字ボタンや小さな文字でもコントラスト比4.5:1以上を確保） */
+  --secondary:#EAF6FB;     /* サブカラー：薄い水色背景 */
+  --navy:#1F4E79;          /* アクセント：信頼感のあるネイビー（部分使用） */
+  --navy-light:#2E6494;    /* ネイビーの明るいトーン（ホバー等） */
+  --navy-pale:var(--secondary); /* ネイビー系の淡色背景は水色に統一 */
+  --white:#FFFFFF;
+  --text:#233b4d;          /* 基本文字色（ネイビーがかったグレー） */
+  --text-sub:#5c7285;      /* 補足文字色（青みがかったグレー） */
+  --border:#dceaf1;        /* 水色がかった控えめな罫線色 */
+  --bg:#ffffff;
+  /* 後方互換：既存ルールが参照している旧変数名を新パレットへ読み替え */
+  --sky:var(--primary);
+  --sky-pale:var(--secondary);
+  --green:var(--primary);
+  --green-pale:var(--secondary);
+  --gray-accent:var(--primary);
+  --gray-accent-pale:var(--secondary);
+  --gray-accent-dark:var(--navy);
+  --gold:var(--primary);
+  --gold-pale:var(--secondary);
+
+  --font-base:"Hiragino Mincho ProN","Yu Mincho","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Serif JP","Noto Sans JP",serif;
+  --font-sans:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
+
+  --max-width:1180px;
+  --radius-lg:18px;
+  --radius-md:12px;
+  --radius-sm:8px;
+  --shadow-soft:0 10px 30px rgba(59,167,216,0.14);
+  --shadow-gold:0 10px 24px rgba(59,167,216,0.28);
+
+  /* ファーストビュー専用アクセント（金色は使わず、メインのブルーを使用） */
+  --hero-gold:var(--primary);
+
+  /* 資産運用シミュレーションCTA専用のゴールドアクセント（他の箇所では使用しません。全体の5%程度に留めています）
+     ボタン背景は、ネイビー文字でコントラスト比4.5:1以上を確保できる明るめの淡いゴールドを採用しています。 */
+  --gold-accent:#BFA15A;
+  --gold-accent-light:#D9C48F;
+  --gold-accent-hover:#E8DAB4;
+  --gold-accent-dark:#96793D;
+  --gold-pale:#FBF4E4;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+
+body{
+  font-family:var(--font-sans);
+  color:var(--text);
+  background:var(--bg);
+  line-height:1.85;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:64px; /* スマホ下部固定CTA分の余白 */
+}
+
+img{max-width:100%;display:block;}
+ul{list-style:none;}
+a{color:inherit;text-decoration:none;}
+
+.container{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:0 22px;
+}
+
+/* 見出し共通 */
+.section-head{
+  text-align:center;
+  margin-bottom:44px;
+}
+.section-head .en-label{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  letter-spacing:0.2em;
+  color:var(--primary-dark);
+  font-weight:700;
+  margin-bottom:16px;
+}
+.section-head .en-label::before,
+.section-head .en-label::after{
+  content:"";
+  width:22px;
+  height:1px;
+  background:var(--gold);
+}
+.section-head h2{
+  font-family:var(--font-base);
+  font-size:24px;
+  font-weight:700;
+  color:var(--navy);
+  line-height:1.6;
+  letter-spacing:0.02em;
+}
+.section-head p.lead{
+  margin-top:16px;
+  color:var(--text-sub);
+  font-size:14.5px;
+}
+
+/* セクション背景のリズム：白 → 薄い水色 → 白 …と交互に配置し、単調さを防いでいます */
+section{padding:72px 0;}
+section.bg-pale{background:var(--secondary);}
+/* ---- 代表プロフィール背景画像変更場所 ----
+   images/profile-bg.jpg（自衛官としての経験を感じさせる後ろ姿の写真など）を配置すると自動的に表示されます。
+   「経験・責任感・使命感」が伝わる落ち着いたトーンを想定し、少し暗めのネイビーのオーバーレイを重ねています。
+   画像が未設置の間は、下のネイビーのグラデーションが代替背景として表示されます。 */
+section.bg-profile{
+  position:relative;
+  background-image:
+    linear-gradient(160deg, rgba(15,45,74,0.78) 0%, rgba(15,45,74,0.88) 100%),
+    url('images/profile-bg.jpg'),
+    linear-gradient(160deg, var(--navy) 0%, #12324f 100%);
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+section.bg-profile .section-head h2{color:#fff;}
+section.bg-profile .section-head p.lead{color:rgba(255,255,255,0.82);}
+section.bg-profile .en-label{color:var(--primary-light);}
+section.bg-sky{
+  background:linear-gradient(180deg, var(--secondary) 0%, #dcf0f8 100%);
+}
+
+/* ボタン共通 */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:16px 28px;
+  border-radius:6px;
+  font-weight:700;
+  font-size:15px;
+  letter-spacing:0.03em;
+  border:1px solid transparent;
+  cursor:pointer;
+  transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease, background .15s ease;
+  width:100%;
+}
+.btn:active{transform:scale(0.98);}
+.btn svg{width:19px;height:19px;flex-shrink:0;}
+
+.btn-line{
+  background:#06C755;
+  color:#fff;
+  box-shadow:0 8px 20px rgba(6,199,85,0.28);
+}
+.btn-tel{
+  background:var(--white);
+  color:var(--navy);
+  border:1.5px solid var(--navy);
+}
+.btn-tel:hover{background:var(--navy);color:#fff;}
+.btn-mail{
+  background:var(--navy);
+  color:#fff;
+  box-shadow:0 8px 20px rgba(15,39,71,0.25);
+}
+.btn-primary{
+  /* サイト共通の主要CTAボタン：ライトブルー背景・白文字、ホバーでネイビーに（白文字コントラスト比4.5:1以上を確保） */
+  background:var(--primary-dark);
+  color:#fff;
+  box-shadow:var(--shadow-gold);
+}
+.btn-primary:hover{background:var(--navy);}
+
+.cta-group{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  max-width:440px;
+  margin:0 auto;
+}
+
+/* アイコン共通（線画SVG用の丸背景） */
+.icon-badge{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  background:var(--sky-pale);
+  color:var(--navy);
+}
+.icon-badge svg{width:24px;height:24px;}
+.icon-badge.gold{background:var(--gray-accent-pale);color:var(--navy-light);}
+/* .icon-badge.green は「相談できる内容」セクション付近で定義（薄いグリーンのアクセント） */
+
+/* ============================================================
+   ヘッダー
+   ファーストビューの背景画像に重ねて表示するため、初期状態は透明です。
+   ページ下部の script で一定量スクロールすると .scrolled クラスが付与され、
+   白背景の通常ヘッダーへ切り替わります。
+============================================================ */
+.site-header{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:900;
+  background:transparent;
+  border-bottom:1px solid transparent;
+  transition:background .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+.site-header.scrolled{
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 4px 16px rgba(15,39,71,0.06);
+}
+.site-header .container{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:68px;
+}
+
+/* ---- 会社ロゴ変更場所 ----
+   images/logo.jpg が正式ロゴです。差し替える場合は同名ファイルを上書きしてください。
+   背景画像の上でも常に視認できるよう、白いプレートの上にロゴを表示しています。
+   画像が読み込めない場合のみ、下のテキストロゴ（フォールバック）が自動表示されます。 */
+.logo{
+  display:flex;
+  align-items:center;
+}
+.logo-plate{
+  display:inline-flex;
+  align-items:center;
+  background:#fff;
+  border-radius:6px;
+  padding:8px 14px;
+  box-shadow:0 6px 16px rgba(15,39,71,0.15);
+}
+.logo img.logo-img{
+  height:30px;
+  width:auto;
+}
+.logo .logo-fallback{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+.logo .logo-mark{
+  width:32px;
+  height:32px;
+  border-radius:3px;
+  background:var(--navy);
+  border:1px solid rgba(255,255,255,0.35);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-family:var(--font-base);
+  font-size:14px;
+  font-weight:700;
+  flex-shrink:0;
+}
+.logo .logo-text{
+  font-family:var(--font-base);
+  font-weight:700;
+  font-size:16px;
+  color:var(--navy);
+  letter-spacing:0.03em;
+}
+.logo .logo-text small{
+  display:block;
+  font-size:9px;
+  font-weight:500;
+  color:var(--text-sub);
+  letter-spacing:0.12em;
+  font-family:var(--font-sans);
+}
+
+.header-actions{display:none;gap:10px;}
+.header-actions .btn{width:auto;padding:11px 18px;font-size:13px;}
+
+.pc-nav{display:none;}
+.pc-nav ul{display:flex;gap:22px;font-size:13.5px;font-weight:600;}
+.pc-nav a{
+  color:var(--text-sub);
+  transition:color .2s;
+  position:relative;
+  padding-bottom:4px;
+  white-space:nowrap;
+}
+.pc-nav a:hover{color:var(--primary-dark);}
+
+/* ============================================================
+   1. ファーストビュー
+============================================================ */
+.hero{
+  position:relative;
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+}
+/* ---- ファーストビュー背景画像変更場所 ----
+   images/plane.jpg（青空を飛ぶ飛行機の写真＝「未来へ進む・成長・安心して飛び立つ」を表現）を使用しています。
+   差し替える場合は同じファイル名で上書きするか、下の url() のパスを書き換えてください。
+   （推奨：横長・1920px以上）
+   画像が未設置の間は、下のグラデーションがオリジナルの代替ビジュアルとして表示されます。
+   写真の鮮明さを優先し、ぼかしは使用していません。文字が読みやすいよう左側にのみ薄いオーバーレイを重ねています。 */
+.hero-bg{
+  position:absolute;
+  inset:0;
+  background-image:
+    url('images/plane.jpg'),
+    linear-gradient(120deg, #eaf6fb 0%, #cdeaf6 45%, #ffffff 100%);
+  background-size:cover, cover;
+  background-position:center, center;
+  background-repeat:no-repeat;
+}
+/* 薄いオーバーレイ：文字が乗る部分だけを軽く白くし、飛行機はできるだけくっきり見せます。
+   スマホは文字が画面幅いっぱいに折り返るため、やや広めに・PCは文字が左側に収まるため右側をよりクリアに。 */
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(100deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.68) 55%, rgba(255,255,255,0.4) 85%, rgba(255,255,255,0.3) 100%);
+}
+.hero-inner{
+  position:relative;
+  z-index:2;
+  width:100%;
+  padding-top:112px;
+  padding-bottom:64px;
+}
+.hero-text{max-width:600px;}
+
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:var(--white);
+  border:1px solid var(--border);
+  color:var(--navy);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:0.04em;
+  padding:8px 16px 8px 12px;
+  border-radius:999px;
+  margin-bottom:24px;
+  white-space:nowrap;
+  box-shadow:var(--shadow-soft);
+}
+.hero-badge svg{width:15px;height:15px;color:var(--primary-dark);}
+
+.hero h1{
+  font-family:var(--font-base);
+  font-size:30px;
+  line-height:1.6;
+  font-weight:700;
+  color:var(--navy);
+  margin-bottom:20px;
+  letter-spacing:0.01em;
+}
+.hero h1 .accent{color:var(--primary-dark);}
+
+.hero .hero-desc{
+  color:var(--text-sub);
+  font-size:15px;
+  margin-bottom:36px;
+  line-height:1.9;
+}
+
+.hero-cta{max-width:440px;}
+
+.hero-scroll-cue{
+  position:absolute;
+  left:50%;
+  bottom:26px;
+  transform:translateX(-50%);
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  color:var(--text-sub);
+  font-size:10px;
+  letter-spacing:0.18em;
+}
+.hero-scroll-cue svg{width:15px;height:15px;animation:heroScrollCue 1.8s ease-in-out infinite;}
+@keyframes heroScrollCue{
+  0%,100%{transform:translateY(0);opacity:0.55;}
+  50%{transform:translateY(6px);opacity:1;}
+}
+
+/* ============================================================
+   共通カード
+============================================================ */
+.grid{display:grid;gap:20px;grid-template-columns:1fr;}
+.card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  padding:30px 24px;
+  box-shadow:var(--shadow-soft);
+  position:relative;
+}
+.card::before{
+  content:"";
+  position:absolute;
+  top:0;left:24px;right:24px;
+  height:2px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  opacity:0;
+  transition:opacity .2s;
+}
+.card:hover::before{opacity:1;}
+.card h3{
+  font-size:17px;
+  margin:18px 0 10px;
+  font-weight:700;
+  color:var(--navy);
+}
+.card p{font-size:13.5px;color:var(--text-sub);}
+
+/* ============================================================
+   2. 選ばれる理由
+============================================================ */
+.reason-grid{display:grid;gap:20px;grid-template-columns:1fr;}
+
+/* 代表からのひとこと（信頼形成ポイント：小さな顔写真＋一言） */
+.trust-quote{
+  margin-top:40px;
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:26px 22px;
+  box-shadow:var(--shadow-soft);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
+  text-align:center;
+}
+/* ---- 代表者写真差替え場所（小）----
+   images/representative.jpg を配置すると自動的に反映されます。 */
+.trust-photo{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  flex-shrink:0;
+  overflow:hidden;
+  border:2px solid var(--navy-light);
+}
+.trust-photo img{width:100%;height:100%;object-fit:cover;}
+.trust-photo .photo-fallback{
+  width:100%;height:100%;
+  background:var(--navy);
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-base);
+  font-size:20px;font-weight:700;
+}
+.trust-quote blockquote{
+  font-size:14.5px;
+  color:var(--text);
+  font-style:normal;
+  line-height:1.9;
+}
+.trust-quote cite{
+  display:block;
+  margin-top:10px;
+  font-size:12px;
+  color:var(--text-sub);
+  font-style:normal;
+}
+
+/* ============================================================
+   3. 資産運用相談（最重要セクション）
+============================================================ */
+/* ---- 資産運用相談：家族の写真差替え場所 ----
+   images/photo-family.jpg を使用しています。セクション全面ではなく、独立したカードとして
+   やや小さめのサイズで掲載することで、写真本来の解像感とコントラストを保っています。 */
+.invest-intro-row{
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+  max-width:920px;
+  margin:0 auto 44px;
+  align-items:center;
+}
+.invest-photo{
+  flex-shrink:0;
+  width:100%;
+  max-width:280px;
+  background:var(--white);
+  padding:8px;
+  border-radius:var(--radius-md);
+  box-shadow:0 16px 34px rgba(31,78,121,0.16);
+}
+.invest-photo img{
+  width:100%;
+  aspect-ratio:4/3;
+  object-fit:cover;
+  border-radius:8px;
+  display:block;
+  /* 色味を少し濃く・コントラストと彩度を上げ、背景に馴染みすぎないように調整 */
+  filter:contrast(1.18) saturate(1.22) brightness(0.96);
+}
+.invest-photo-cap{
+  text-align:center;
+  font-size:11.5px;
+  color:var(--text-sub);
+  padding:10px 6px 4px;
+  letter-spacing:0.02em;
+}
+.invest-intro{
+  max-width:640px;
+  text-align:center;
+  font-size:15px;
+  color:var(--text-sub);
+}
+.invest-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:18px;
+}
+.invest-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  padding:28px 22px;
+  box-shadow:var(--shadow-soft);
+}
+.invest-card .icon-badge{background:var(--secondary);color:var(--primary-dark);}
+.invest-card h3{
+  font-size:16.5px;
+  font-weight:700;
+  margin:16px 0 10px;
+  color:var(--navy);
+}
+.invest-card p{font-size:13.5px;color:var(--text-sub);}
+
+.invest-cta{
+  margin-top:44px;
+  text-align:center;
+}
+.invest-cta .btn{max-width:340px;}
+
+/* 金融庁 資産運用シミュレーターへの導線カード（ゴールドは全体の中でこのCTAのみに限定使用） */
+.fsa-tool{
+  margin:32px auto 0;
+  max-width:600px;
+  background:linear-gradient(180deg, #ffffff 0%, var(--gold-pale) 130%);
+  border:1.5px solid var(--gold-accent-light);
+  border-radius:var(--radius-md);
+  padding:26px 24px;
+  text-align:center;
+  box-shadow:0 14px 34px rgba(191,161,90,0.18);
+  position:relative;
+  overflow:hidden;
+}
+/* カード上部の細いゴールドのアクセントライン */
+.fsa-tool::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;
+  height:4px;
+  background:linear-gradient(90deg, var(--gold-accent), var(--gold-accent-light), var(--gold-accent));
+}
+.fsa-tool-eyebrow{
+  display:inline-block;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.14em;
+  color:var(--gold-accent-dark);
+  background:var(--gold-pale);
+  border:1px solid var(--gold-accent-light);
+  padding:4px 12px;
+  border-radius:999px;
+  margin-bottom:12px;
+}
+.fsa-tool-title{color:var(--navy);font-size:17px;font-weight:700;margin-bottom:8px;letter-spacing:0.01em;}
+.fsa-tool-desc{color:var(--text-sub);font-size:12.5px;margin-bottom:20px;}
+.fsa-tool .btn{max-width:380px;margin:0 auto;}
+
+/* ゴールドCTAボタン（ゆっくりした浮き上がり＋影の変化＋控えめなパルス。派手な点滅はなし） */
+.btn-gold-cta{
+  background:var(--gold-accent-light);
+  color:var(--navy);
+  border:1px solid var(--gold-accent);
+  box-shadow:0 10px 22px rgba(191,161,90,0.35);
+  transition:transform .4s ease, box-shadow .4s ease, background .4s ease;
+  animation:goldCtaPulse 3.2s ease-in-out infinite;
+}
+.btn-gold-cta:hover,
+.btn-gold-cta:focus-visible{
+  background:var(--gold-accent-hover);
+  transform:translateY(-2px);
+  box-shadow:0 18px 34px rgba(191,161,90,0.5);
+  animation-play-state:paused;
+}
+@keyframes goldCtaPulse{
+  0%,100%{box-shadow:0 10px 22px rgba(191,161,90,0.32);}
+  50%{box-shadow:0 10px 28px rgba(191,161,90,0.55);}
+}
+
+/* ============================================================
+   4. 相談できる内容（個人のお客様向けサービス一覧・番号なしのカード形式）
+============================================================ */
+.service-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:22px;
+  max-width:980px;
+  margin:0 auto;
+}
+.service-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:32px 26px;
+  box-shadow:var(--shadow-soft);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.service-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 18px 36px rgba(31,78,121,0.14);
+}
+.service-card .icon-badge{margin-bottom:18px;}
+.service-card h3{
+  font-size:17px;
+  font-weight:700;
+  color:var(--navy);
+  margin-bottom:10px;
+}
+.service-card p{font-size:13.5px;color:var(--text-sub);}
+/* 薄いグリーンのアクセントバリエーション（水色・ネイビーと交互に使用） */
+.icon-badge.green{background:#E8F5EC;color:#3D7A54;}
+
+/* ============================================================
+   5. 代表プロフィール
+============================================================ */
+.profile-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:10px;
+  box-shadow:var(--shadow-soft);
+  overflow:hidden;
+  max-width:260px;
+  margin:0 auto;
+}
+.profile-inner{padding:26px 20px 30px;}
+
+/* ---- 代表者写真差替え場所（大）----
+   images/representative-main.jpg を配置すると自動的に反映されます（推奨：縦長・正面・清潔感のある構図）。
+   写真を大きく見せすぎないよう、カード幅は控えめ（最大260px）に設定しています。 */
+.profile-photo{
+  width:100%;
+  aspect-ratio:4/5;
+  border-radius:var(--radius-md);
+  overflow:hidden;
+  background:linear-gradient(160deg,var(--primary),var(--navy));
+  position:relative;
+}
+/* 写真の直下に名前・役職をセットで表示するキャプション */
+.profile-caption{
+  text-align:center;
+  padding:16px 8px 8px;
+}
+.profile-photo img{width:100%;height:100%;object-fit:cover;}
+.profile-photo .photo-fallback-lg{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;
+  gap:10px;
+  color:#fff;
+}
+.profile-photo .photo-fallback-lg .initial{
+  font-family:var(--font-base);
+  font-size:52px;
+  font-weight:700;
+}
+.profile-photo .photo-fallback-lg .cap{
+  font-size:11px;
+  letter-spacing:0.1em;
+  color:#cfe0eb;
+}
+.profile-photo .frame-corner{
+  position:absolute;
+  width:26px;height:26px;
+  border:2px solid rgba(255,255,255,0.7);
+}
+.profile-photo .frame-corner.tl{top:14px;left:14px;border-right:none;border-bottom:none;}
+.profile-photo .frame-corner.br{bottom:14px;right:14px;border-left:none;border-top:none;}
+
+.profile-caption .name-ja{
+  font-family:var(--font-base);
+  font-size:19px;
+  font-weight:700;
+  color:var(--navy);
+}
+.profile-caption .name-role{
+  display:block;
+  font-size:12.5px;
+  color:var(--text-sub);
+  margin-top:5px;
+  letter-spacing:0.03em;
+}
+/* 代表プロフィールの本文パネル：背景写真の上でも読みやすいよう、すりガラス調のパネルに */
+.profile-text-panel{
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.18);
+  border-radius:var(--radius-lg);
+  padding:28px 24px;
+}
+.profile-badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:0 0 22px;
+}
+.profile-badges span{
+  background:rgba(255,255,255,0.14);
+  color:#fff;
+  font-size:11px;
+  font-weight:700;
+  padding:6px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.28);
+}
+.profile-message{
+  font-size:14px;
+  color:rgba(255,255,255,0.85);
+  border-top:1px solid rgba(255,255,255,0.18);
+  padding-top:20px;
+}
+.profile-message p{margin-bottom:14px;}
+.profile-message p:last-child{margin-bottom:0;}
+
+/* ============================================================
+   6. ご相談の流れ（STEP形式のロードマップ）
+============================================================ */
+.flow-roadmap{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  max-width:760px;
+  margin:0 auto;
+}
+.flow-step-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:28px 26px;
+  box-shadow:var(--shadow-soft);
+  display:flex;
+  gap:20px;
+  align-items:flex-start;
+}
+.flow-step-circle{
+  flex-shrink:0;
+  width:58px;height:58px;
+  border-radius:50%;
+  background:linear-gradient(160deg, var(--primary) 0%, var(--navy) 100%);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.flow-step-circle svg{width:26px;height:26px;}
+.flow-step-label{
+  display:block;
+  font-family:var(--font-base);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.14em;
+  color:var(--primary-dark);
+  margin-bottom:6px;
+}
+.flow-step-body h3{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.flow-step-body p{font-size:13.5px;color:var(--text-sub);}
+.flow-connector{
+  display:flex;
+  justify-content:center;
+  padding:6px 0;
+  color:var(--primary);
+  opacity:0.7;
+}
+.flow-connector svg{width:20px;height:20px;}
+
+/* ============================================================
+   お約束ミニバンド（信頼補強・お問い合わせ前）
+============================================================ */
+.promise-band{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+  margin-bottom:48px;
+}
+.promise-mini{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  padding:18px 18px;
+}
+.promise-mini h4{font-size:13.5px;font-weight:700;color:var(--navy);margin-bottom:3px;}
+.promise-mini p{font-size:12px;color:var(--text-sub);}
+
+/* ============================================================
+   7. お問い合わせ
+============================================================ */
+.contact-section{background:linear-gradient(180deg,var(--white) 0%, var(--sky-pale) 100%);}
+.contact-cta-box{
+  background:linear-gradient(135deg, var(--primary-dark) 0%, var(--navy) 100%);
+  border-radius:var(--radius-lg);
+  padding:32px 24px;
+  margin-bottom:36px;
+  position:relative;
+  overflow:hidden;
+}
+.contact-cta-box::after{
+  content:"";
+  position:absolute;
+  top:-40px;right:-40px;
+  width:140px;height:140px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,0.12),transparent 70%);
+}
+.contact-cta-box h3{
+  font-size:17px;
+  color:#fff;
+  text-align:center;
+  margin-bottom:8px;
+  position:relative;
+}
+.contact-cta-box .cta-sub{
+  text-align:center;
+  font-size:12.5px;
+  color:#b9cadb;
+  margin-bottom:22px;
+  position:relative;
+}
+
+.form-wrap{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:30px 22px;
+  box-shadow:var(--shadow-soft);
+}
+.form-wrap h3{font-size:17px;color:var(--navy);margin-bottom:6px;}
+.form-wrap .form-sub{font-size:13px;color:var(--text-sub);margin-bottom:26px;}
+.form-group{margin-bottom:18px;}
+.form-group label{
+  display:block;font-size:13.5px;font-weight:700;margin-bottom:8px;color:var(--navy);
+}
+.form-group label .required{
+  color:#a34a4a;font-size:11px;background:#fbeaea;padding:2px 7px;border-radius:4px;margin-left:6px;font-weight:700;
+}
+.form-group label .optional{
+  color:var(--text-sub);font-size:11px;background:#f1f4f5;padding:2px 7px;border-radius:4px;margin-left:6px;font-weight:700;
+}
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="email"],
+.form-group select,
+.form-group textarea{
+  width:100%;
+  padding:13px 14px;
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  font-size:15px;
+  font-family:inherit;
+  color:var(--text);
+  background:var(--bg);
+  transition:border-color .15s;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  outline:none;border-color:var(--sky);background:var(--white);
+}
+.form-group textarea{resize:vertical;min-height:110px;}
+
+.checkbox-row{display:flex;gap:10px;flex-wrap:wrap;}
+.checkbox-row label{
+  display:flex;align-items:center;gap:6px;font-size:13px;font-weight:500;
+  border:1px solid var(--border);padding:8px 12px;border-radius:999px;cursor:pointer;color:var(--text);
+}
+.checkbox-row input{accent-color:var(--navy);}
+
+.privacy-note{font-size:12px;color:var(--text-sub);margin-bottom:20px;line-height:1.8;}
+.privacy-note a{color:var(--navy);text-decoration:underline;}
+
+.form-submit-btn{
+  background:var(--primary-dark);
+  color:#fff;border:none;width:100%;padding:17px;border-radius:6px;
+  font-size:15px;font-weight:700;letter-spacing:0.03em;cursor:pointer;
+  box-shadow:var(--shadow-gold);
+  transition:background .2s ease;
+}
+.form-submit-btn:hover{background:var(--navy);}
+
+#form-message{margin-top:16px;padding:14px;border-radius:var(--radius-sm);font-size:13.5px;display:none;}
+#form-message.show{display:block;}
+#form-message.success{background:var(--green-pale);color:#3d6b4c;border:1px solid #c8e2cf;}
+#form-message.error{background:#fbeaea;color:#a34a4a;border:1px solid #edc7c7;}
+
+/* ============================================================
+   フッター
+============================================================ */
+.site-footer{background:var(--navy);color:#c4d2dd;padding:50px 0 100px;}
+.footer-logo{margin-bottom:20px;}
+/* 白背景ロゴ画像をネイビーのフッター上でも綺麗に見せるための白プレート */
+.footer-logo-plate{
+  display:inline-flex;
+  align-items:center;
+  background:#fff;
+  border-radius:6px;
+  padding:10px 16px;
+}
+.footer-logo-plate img{height:30px;width:auto;}
+.footer-logo .logo-mark{
+  width:32px;height:32px;border-radius:3px;background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-base);
+  font-size:14px;font-weight:700;color:#fff;
+}
+.footer-info{font-size:13px;line-height:2.1;color:#9fb2c2;}
+.footer-nav{margin-top:30px;display:flex;flex-wrap:wrap;gap:14px 22px;font-size:13px;}
+.footer-nav a{color:#c4d2dd;}
+.footer-bottom{
+  margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,0.12);
+  font-size:11.5px;line-height:1.9;color:#7e91a1;
+  display:flex;flex-direction:column;gap:10px;
+}
+.footer-bottom a{color:#9fb2c2;}
+
+/* ============================================================
+   スマホ下部固定CTA
+============================================================ */
+.fixed-cta{
+  position:fixed;left:0;right:0;bottom:0;z-index:950;
+  display:flex;background:var(--white);
+  border-top:1px solid var(--border);
+  box-shadow:0 -6px 20px rgba(0,0,0,0.08);
+}
+.fixed-cta a{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  padding:9px 4px 10px;font-size:10.5px;font-weight:700;
+}
+.fixed-cta a svg{width:19px;height:19px;}
+.fixed-cta a.line{color:#06C755;}
+.fixed-cta a.tel{color:var(--navy);}
+.fixed-cta a.mail{color:var(--primary-dark);}
+.fixed-cta a + a{border-left:1px solid var(--border);}
+
+/* トップに戻る */
+.to-top{
+  position:fixed;right:16px;bottom:76px;width:42px;height:42px;border-radius:50%;
+  background:var(--navy);border:1px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;color:var(--gold);
+  opacity:0;pointer-events:none;transition:opacity .2s;z-index:940;
+}
+.to-top svg{width:18px;height:18px;}
+.to-top.visible{opacity:1;pointer-events:auto;}
+
+/* ============================================================
+   レスポンシブ：タブレット以上
+============================================================ */
+@media (min-width:600px){
+  .invest-grid{grid-template-columns:repeat(3,1fr);}
+  .service-grid{grid-template-columns:repeat(2,1fr);}
+  .cta-group{flex-direction:row;max-width:none;}
+  .promise-band{grid-template-columns:repeat(3,1fr);}
+}
+
+/* ============================================================
+   レスポンシブ：PC以上
+============================================================ */
+@media (min-width:900px){
+  section{padding:104px 0;}
+  .pc-nav{display:block;}
+  .header-actions{display:flex;}
+  .logo img.logo-img{height:34px;}
+
+  .hero-inner{padding-top:150px;padding-bottom:110px;}
+  .hero h1{font-size:48px;}
+  .hero .hero-desc{font-size:17px;max-width:560px;}
+  .hero-cta{max-width:460px;}
+  /* PCでは文字が左側に収まるため、右側をよりクリアにして飛行機をくっきり見せる */
+  .hero-overlay{
+    background:
+      linear-gradient(100deg, rgba(255,255,255,0.84) 0%, rgba(255,255,255,0.55) 34%, rgba(255,255,255,0.2) 58%, rgba(255,255,255,0.08) 100%);
+  }
+
+  .section-head h2{font-size:31px;}
+
+  .reason-grid{grid-template-columns:repeat(3,1fr);}
+  .trust-quote{flex-direction:row;text-align:left;padding:32px 36px;max-width:820px;}
+
+  .invest-intro{font-size:16px;}
+  .invest-intro-row{flex-direction:row;align-items:center;text-align:left;gap:44px;}
+  .invest-photo{max-width:300px;}
+  .invest-intro{text-align:left;margin:0;}
+
+  .service-grid{grid-template-columns:repeat(3,1fr);}
+
+  .profile-layout{
+    display:grid;grid-template-columns:290px 1fr;gap:52px;align-items:start;
+  }
+  .profile-card{padding:14px;margin:0;}
+  .profile-inner{padding:20px 26px 26px;}
+
+  .flow-roadmap{
+    max-width:none;flex-direction:row;align-items:stretch;gap:0;
+  }
+  .flow-step-card{
+    flex:1;flex-direction:column;text-align:center;align-items:center;
+    padding:32px 20px;
+  }
+  .flow-step-circle{margin-bottom:6px;}
+  .flow-connector{
+    flex-shrink:0;align-items:center;padding:0 4px;transform:rotate(-90deg);
+  }
+
+  .contact-layout{
+    display:grid;grid-template-columns:0.85fr 1.15fr;gap:44px;align-items:flex-start;
+  }
+
+  .fixed-cta{display:none;}
+  body{padding-bottom:0;}
+  .to-top{bottom:26px;}
+
+  .footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;}
+  .footer-bottom{flex-direction:row;justify-content:space-between;align-items:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     ヘッダー
+============================================================ -->
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <!-- 会社ロゴ変更場所：現在 images/logo.jpg を使用中。差し替える場合はこのファイルを上書きしてください -->
+    <a href="#top" class="logo">
+      <span class="logo-plate">
+        <img src="images/logo.jpg" alt="株式会社SAKIMORI" class="logo-img"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <span class="logo-fallback" style="display:none;">
+          <span class="logo-mark">咲</span>
+          <span class="logo-text">株式会社SAKIMORI
+            <small>SAKIMORI INC.</small>
+          </span>
+        </span>
+      </span>
+    </a>
+
+    <nav class="pc-nav">
+      <ul>
+        <li><a href="#reason">選ばれる理由</a></li>
+        <li><a href="#invest">資産運用相談</a></li>
+        <li><a href="#topics">相談内容</a></li>
+        <li><a href="#profile">代表紹介</a></li>
+        <li><a href="#flow">相談の流れ</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+      </ul>
+    </nav>
+
+    <!-- PC用ヘッダーCTA：電話番号・LINE URLは script 内 CONTACT_INFO で一括管理しています -->
+    <div class="header-actions">
+      <a href="#" data-contact="tel" class="btn btn-tel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+        電話で相談
+      </a>
+      <a href="#contact" class="btn btn-mail">お問い合わせ</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============================================================
+       ① ファーストビュー
+  ============================================================ -->
+  <section class="hero">
+    <!-- ファーストビュー背景画像変更場所：images/hero-bg.jpg を配置すると自動的に表示されます -->
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-inner container">
+      <div class="hero-text">
+        <span class="hero-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg>
+          元自衛官が代表を務める相談窓口
+        </span>
+
+        <h1>
+          人生と未来のお金に、<br>
+          <span class="accent">確かな安心設計</span>を。
+        </h1>
+
+        <p class="hero-desc">
+          元自衛官による、ライフプラン・資産運用のご相談窓口。<br>
+          人生設計から逆算した、長期的に安心できるご提案をいたします。
+        </p>
+
+        <!-- ファーストビューCTA：LINE最優先 → 電話（ゴールド系アクセント） -->
+        <div class="cta-group hero-cta">
+          <!-- LINEリンク変更場所：URLは下部 script 内 CONTACT_INFO.lineUrl で一括管理しています -->
+          <a href="#" data-contact="line" class="btn btn-line">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.94 2 10.7c0 3.02 1.86 5.68 4.66 7.24-.15.6-.86 3.3-.9 3.5 0 0-.02.15.08.2.1.06.22.02.22.02.3-.04 3.36-2.2 3.9-2.57.65.1 1.34.15 2.04.15 5.52 0 10-3.94 10-8.7S17.52 2 12 2z"/></svg>
+            LINEで相談する
+          </a>
+          <!-- 電話番号変更場所：番号は下部 script 内 CONTACT_INFO.telHref / telDisplay で一括管理しています -->
+          <a href="#" data-contact="tel" class="btn btn-tel">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+            電話で相談する
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-cue">
+      <span>SCROLL</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ② SAKIMORIが選ばれる理由
+  ============================================================ -->
+  <section id="reason">
+    <div class="container">
+      <div class="section-head">
+        <span class="en-label">WHY SAKIMORI</span>
+        <h2>SAKIMORIが選ばれる理由</h2>
+        <p class="lead">専門知識だけでなく、「誰が伝えるか」にもこだわっています。</p>
+      </div>
+
+      <div class="reason-grid">
+        <div class="card">
+          <div class="icon-badge gold">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/><path d="M9.5 12l1.8 1.8L15 10.2"/></svg>
+          </div>
+          <h3>元自衛官としての責任感</h3>
+          <p>「もしもの備え」と正面から向き合ってきた経験から、規律と誠実さをもってお客様の将来に向き合います。</p>
+        </div>
+        <div class="card">
+          <div class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4L3 8l9 4 9-4-9-4z"/><path d="M3 8v6c0 2 4 4 9 4s9-2 9-4V8"/></svg>
+          </div>
+          <h3>金融教育セミナーの経験</h3>
+          <p>自衛官・一般個人向けの金融セミナーで培った「わかりやすく伝える力」で、専門知識を自分ごととしてお届けします。</p>
+        </div>
+        <div class="card">
+          <div class="icon-badge green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.3a3 3 0 0 1 0 5.8"/><path d="M21 20c0-2.6-1.7-4.8-4-5.6"/></svg>
+          </div>
+          <h3>一人ひとりに合わせたライフプラン</h3>
+          <p>年齢・家族構成・将来の希望は人それぞれ。テンプレートではない、あなただけの設計図を一緒に描きます。</p>
+        </div>
+      </div>
+
+      <!-- 信頼形成ポイント：代表からのひとこと -->
+      <div class="trust-quote">
+        <!-- 代表者写真差替え場所（小） -->
+        <div class="trust-photo">
+          <img src="images/representative.jpg" alt="代表 渡辺琢哉"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="photo-fallback" style="display:none;">渡</div>
+        </div>
+        <div>
+          <blockquote>
+            「お金の話は、人生の話でもあります。難しい専門用語を並べるのではなく、ご自身のこととして納得いただけるまで、丁寧にお話しすることを大切にしています。」
+          </blockquote>
+          <cite>代表取締役　渡辺 琢哉</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ③ 資産運用相談（最重要セクション）
+  ============================================================ -->
+  <section id="invest" class="bg-sky">
+    <div class="container">
+      <div class="section-head">
+        <span class="en-label">ASSET MANAGEMENT</span>
+        <h2>資産運用相談について</h2>
+      </div>
+
+      <div class="invest-intro-row">
+        <div class="invest-photo">
+          <img src="images/photo-family.jpg" alt="家族と将来の安心を表す写真">
+        </div>
+        <p class="invest-intro">
+          「何から始めればいいかわからない」という状態も、ご相談のスタートラインです。SAKIMORIでは、目先の商品選びではなく、人生設計全体から逆算した資産形成をご提案します。
+        </p>
+      </div>
+
+      <div class="invest-grid">
+        <div class="invest-card">
+          <div class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-1-7-4.5-7-9V6l7-3 7 3v6c0 4.5-3 8-7 9z"/><path d="M9.5 12l1.8 1.8L15 10.2"/></svg>
+          </div>
+          <h3>将来のお金の不安を整理できる</h3>
+          <p>漠然とした不安を、家計・保障・資産の3つの観点から可視化し、優先順位をつけて整理します。</p>
+        </div>
+        <div class="invest-card">
+          <div class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          </div>
+          <h3>投資初心者でも安心して相談できる</h3>
+          <p>NISA・iDeCoといった制度の仕組みから、専門用語を使わずわかりやすくご説明します。</p>
+        </div>
+        <div class="invest-card">
+          <div class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+          </div>
+          <h3>人生設計から逆算して考える</h3>
+          <p>結婚・教育・住宅・老後といったライフイベントを起点に、無理のない資産形成プランを設計します。</p>
+        </div>
+      </div>
+
+      <div class="invest-cta">
+        <a href="#" data-contact="line" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-1-7-4.5-7-9V6l7-3 7 3v6c0 4.5-3 8-7 9z"/></svg>
+          資産運用について相談する
+        </a>
+      </div>
+
+      <!-- 金融庁 資産運用シミュレーターへの導線（外部リンク／新しいタブで開きます） -->
+      <div class="fsa-tool">
+        <span class="fsa-tool-eyebrow">FREE SIMULATOR</span>
+        <p class="fsa-tool-title">3秒でわかる、<br>未来のお金シミュレーション</p>
+        <p class="fsa-tool-desc">金融庁の資産運用シミュレーターで、将来の資金計画を無料で確認できます。</p>
+        <a href="https://www.fsa.go.jp/policy/nisa2/tsumitate-simulator/" target="_blank" rel="noopener noreferrer" class="btn btn-gold-cta">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+          無料でシミュレーションする
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ④ 相談できる内容
+  ============================================================ -->
+  <section id="topics">
+    <div class="container">
+      <div class="section-head">
+        <span class="en-label">CONSULTING SERVICES</span>
+        <h2>ご相談いただける内容</h2>
+        <p class="lead">「こんなこと聞いてもいいのかな」ということほど、お気軽にご相談ください。</p>
+      </div>
+
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+          </div>
+          <h3>資産運用相談</h3>
+          <p>将来のお金の不安を整理し、一人ひとりに合わせた資産形成をサポートします。</p>
+        </div>
+
+        <div class="service-card">
+          <div class="icon-badge green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-1-7-4.5-7-9V6l7-3 7 3v6c0 4.5-3 8-7 9z"/></svg>
+          </div>
+          <h3>保険の見直し</h3>
+          <p>現在の生活や将来設計に合わせて、必要な保障を一緒に考えます。</p>
+        </div>
+
+        <div class="service-card">
+          <div class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 14c.7.7 1.8 1 3 1s2.3-.3 3-1"/><path d="M9 10h.01M15 10h.01"/></svg>
+          </div>
+          <h3>老後資金の準備</h3>
+          <p>年金だけに頼らない、ゆとりある老後のための準備を一緒に考えます。</p>
+        </div>
+
+        <div class="service-card">
+          <div class="icon-badge green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-4 10 4-10 4-10-4z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg>
+          </div>
+          <h3>教育資金</h3>
+          <p>お子さまの将来の選択肢を広げるための、計画的な準備方法をご提案します。</p>
+        </div>
+
+        <div class="service-card">
+          <div class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l8-8 8 8"/><path d="M6 10v9h12v-9"/></svg>
+          </div>
+          <h3>家計改善</h3>
+          <p>収支の見える化から、無理なく続けられる家計改善の仕組みづくりを支援します。</p>
+        </div>
+
+        <div class="service-card">
+          <div class="icon-badge green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20l-5-2V4l5 2 6-2 5 2v14l-5-2-6 2z"/><path d="M9 6v14M15 4v14"/></svg>
+          </div>
+          <h3>ライフプラン設計</h3>
+          <p>人生設計に合わせた、長期的なお金の計画をご提案します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ⑤ 代表プロフィール
+  ============================================================ -->
+  <section id="profile" class="bg-profile">
+    <div class="container">
+      <div class="section-head">
+        <span class="en-label">REPRESENTATIVE</span>
+        <h2>代表プロフィール</h2>
+        <p class="lead">現場で「備え」の重さを知る一人として、皆さまと向き合っています。</p>
+      </div>
+
+      <div class="profile-layout">
+        <div class="profile-card">
+          <div class="profile-photo">
+            <img src="images/representative-main.jpg" alt="代表取締役 渡辺琢哉"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="photo-fallback-lg" style="display:none;">
+              <span class="initial">渡辺</span>
+              <span class="cap">TAKUYA WATANABE</span>
+            </div>
+            <span class="frame-corner tl"></span>
+            <span class="frame-corner br"></span>
+          </div>
+          <!-- 写真と自然にセットで見せる名前・役職 -->
+          <div class="profile-caption">
+            <span class="name-ja">渡辺 琢哉</span>
+            <span class="name-role">代表取締役｜株式会社SAKIMORI</span>
+          </div>
+        </div>
+
+        <div class="profile-text-panel">
+          <div class="profile-badges">
+            <span>元自衛官</span>
+            <span>金融セミナー講師</span>
+            <span>ライフプランアドバイザー</span>
+          </div>
+          <div class="profile-message">
+            <p>
+              自衛官として勤務していた経験の中で、「もしもの備え」の重みを間近で感じてきました。その経験から、金融の知識を届けることで一人でも多くの人の不安を減らしたいという想いで、この会社を立ち上げました。
+            </p>
+            <p>
+              現在は自衛官や一般のお客様向けに金融セミナーを行いながら、個別相談にも力を入れています。難しい専門用語はできる限り使わず、「自分ごと」として理解していただけるようお話しすることを心がけています。
+            </p>
+            <p>
+              お金の話は、人生の話でもあります。一度きりのご提案ではなく、長くお付き合いできる相談相手として、ぜひ頼っていただければ嬉しいです。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ⑥ ご相談の流れ
+  ============================================================ -->
+  <section id="flow">
+    <div class="container">
+      <div class="section-head">
+        <span class="en-label">FLOW</span>
+        <h2>ご相談の流れ</h2>
+        <p class="lead">初回のお問い合わせから、実際のご相談までの流れをご紹介します。</p>
+      </div>
+
+      <div class="flow-roadmap">
+        <div class="flow-step-card">
+          <div class="flow-step-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          </div>
+          <div class="flow-step-body">
+            <span class="flow-step-label">STEP 01</span>
+            <h3>ヒアリング</h3>
+            <p>お客様の現在の状況や、将来に対するご希望を丁寧に確認します。LINE・電話・フォームからお気軽にご連絡ください。</p>
+          </div>
+        </div>
+
+        <div class="flow-connector">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+        </div>
+
+        <div class="flow-step-card">
+          <div class="flow-step-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/><path d="M9.5 12l1.8 1.8L15 10.2"/></svg>
+          </div>
+          <div class="flow-step-body">
+            <span class="flow-step-label">STEP 02</span>
+            <h3>リスク分析</h3>
+            <p>お伺いした内容をもとに、今必要な保障や見直すべき課題を整理し、優先順位を明確にします。</p>
+          </div>
+        </div>
+
+        <div class="flow-connector">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+        </div>
+
+        <div class="flow-step-card">
+          <div class="flow-step-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+          </div>
+          <div class="flow-step-body">
+            <span class="flow-step-label">STEP 03</span>
+            <h3>ご提案</h3>
+            <p>整理した課題をもとに、最適なプランをご案内します。その場での即決は求めませんので、じっくりご検討ください。</p>
+          </div>
+        </div>
+
+        <div class="flow-connector">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+        </div>
+
+        <div class="flow-step-card">
+          <div class="flow-step-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <div class="flow-step-body">
+            <span class="flow-step-label">STEP 04</span>
+            <h3>アフターフォロー</h3>
+            <p>ご契約後も定期的なフォローアップを実施。結婚・出産・住宅購入などの節目で、改めてプランを見直します。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ⑦ お問い合わせ
+  ============================================================ -->
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <div class="section-head">
+        <span class="en-label">CONTACT</span>
+        <h2>まずはお気軽にご相談ください</h2>
+        <p class="lead">相談だけでも歓迎です。ご都合の良い方法でお問い合わせください。</p>
+      </div>
+
+      <div class="contact-layout">
+        <div>
+          <!-- 優先度の高いCTA：LINE最優先 → 電話 → メール -->
+          <div class="contact-cta-box">
+            <h3>LINEなら、最短で気軽に相談できます</h3>
+            <p class="cta-sub">友だち追加後、そのままチャット形式でご相談いただけます</p>
+            <div class="cta-group" style="flex-direction:column;">
+              <a href="#" data-contact="line" class="btn btn-line">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.94 2 10.7c0 3.02 1.86 5.68 4.66 7.24-.15.6-.86 3.3-.9 3.5 0 0-.02.15.08.2.1.06.22.02.22.02.3-.04 3.36-2.2 3.9-2.57.65.1 1.34.15 2.04.15 5.52 0 10-3.94 10-8.7S17.52 2 12 2z"/></svg>
+                ①LINEで相談する（返信目安：当日〜翌営業日）
+              </a>
+              <a href="#" data-contact="tel" class="btn btn-tel" style="background:transparent;color:#fff;border-color:rgba(255,255,255,0.5);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+                ②電話で相談する（受付：平日9:00〜18:00）
+              </a>
+              <a href="#" data-contact="mail" class="btn btn-primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+                ③メールで問い合わせる
+              </a>
+            </div>
+          </div>
+
+          <!-- お客様への約束（信頼補強ミニバンド） -->
+          <div class="promise-band">
+            <div class="promise-mini">
+              <div class="icon-badge gold" style="width:40px;height:40px;">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8l-8.5 8.5L4 12"/></svg>
+              </div>
+              <div>
+                <h4>強引な勧誘はしません</h4>
+                <p>ご自身のペースでご検討いただけます。</p>
+              </div>
+            </div>
+            <div class="promise-mini">
+              <div class="icon-badge" style="width:40px;height:40px;">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12h8M8 16h5"/></svg>
+              </div>
+              <div>
+                <h4>メリット・デメリットを両方お伝え</h4>
+                <p>正直な情報提供を大切にしています。</p>
+              </div>
+            </div>
+            <div class="promise-mini">
+              <div class="icon-badge green" style="width:40px;height:40px;">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+              </div>
+              <div>
+                <h4>個人情報は厳重に管理</h4>
+                <p>ご相談内容は適切に管理いたします。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 問い合わせフォーム -->
+        <div class="form-wrap">
+          <h3>フォームからのお問い合わせ</h3>
+          <p class="form-sub">下記フォームにご記入のうえ送信してください。担当者より折り返しご連絡いたします。</p>
+
+          <!--
+            フォーム送信について（編集メモ）：
+            現状はJavaScriptで送信内容を検証し、完了メッセージを表示するデモ挙動です。
+            実際の送信先（フォーム送信サービスやサーバーAPI）が決まり次第、
+            下部の script 内 CONTACT_FORM_ENDPOINT の fetch処理に差し替えてください。
+          -->
+          <form id="contact-form" novalidate>
+            <div class="form-group">
+              <label for="name">お名前<span class="required">必須</span></label>
+              <input type="text" id="name" name="name" placeholder="例）咲守 太郎" required>
+            </div>
+
+            <div class="form-group">
+              <label for="tel">電話番号<span class="optional">任意</span></label>
+              <input type="tel" id="tel" name="tel" placeholder="例）090-1234-5678">
+            </div>
+
+            <div class="form-group">
+              <label for="email">メールアドレス<span class="required">必須</span></label>
+              <input type="email" id="email" name="email" placeholder="例）example@sakimori.co.jp" required>
+            </div>
+
+            <div class="form-group">
+              <label for="category">ご相談内容<span class="required">必須</span></label>
+              <select id="category" name="category" required>
+                <option value="" disabled selected>選択してください</option>
+                <option value="asset">資産形成の相談</option>
+                <option value="insurance">保険の見直し</option>
+                <option value="retirement">老後資金の相談</option>
+                <option value="education">教育資金の相談</option>
+                <option value="household">家計改善の相談</option>
+                <option value="other">その他</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>ご希望の連絡方法<span class="optional">任意</span></label>
+              <div class="checkbox-row">
+                <label><input type="checkbox" name="contact_method" value="line">LINE</label>
+                <label><input type="checkbox" name="contact_method" value="tel">電話</label>
+                <label><input type="checkbox" name="contact_method" value="email">メール</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="message">お問い合わせ内容<span class="optional">任意</span></label>
+              <textarea id="message" name="message" placeholder="現在お悩みのことや、ご相談したい内容をご自由にご記入ください。"></textarea>
+            </div>
+
+            <p class="privacy-note">
+              送信いただいた情報は、お問い合わせへの対応以外の目的では使用いたしません。詳細は<a href="#privacy">プライバシーポリシー</a>をご確認のうえ送信してください。
+            </p>
+
+            <button type="submit" class="form-submit-btn">この内容で送信する</button>
+
+            <div id="form-message"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     フッター
+============================================================ -->
+<footer class="site-footer" id="privacy">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <!-- 会社ロゴ差替え場所（フッター）：現在 images/logo.jpg を使用中 -->
+        <div class="footer-logo">
+          <span class="footer-logo-plate">
+            <img src="images/logo.jpg" alt="株式会社SAKIMORI"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
+            <span class="logo-mark" style="display:none;">咲</span>
+          </span>
+        </div>
+        <div class="footer-info">
+          〒000-0000　東京都◯◯区◯◯ 0-0-0（住所は仮表記／差し替えてください）<br>
+          TEL：<span data-contact-text="tel">0120-000-000</span>（平日 9:00〜18:00）<br>
+          Email：<span data-contact-text="mail">info@sakimori.co.jp</span><br>
+          代表取締役：渡辺 琢哉
+        </div>
+      </div>
+
+      <nav class="footer-nav">
+        <a href="#reason">選ばれる理由</a>
+        <a href="#invest">資産運用相談</a>
+        <a href="#topics">相談できる内容</a>
+        <a href="#profile">代表プロフィール</a>
+        <a href="#flow">ご相談の流れ</a>
+        <a href="#contact">お問い合わせ</a>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <span>プライバシーポリシー・特定商取引法に基づく表記は準備中です（実際の内容に差し替えてください）</span>
+      <span>&copy; <span id="year"></span> SAKIMORI Inc. All Rights Reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- スマホ下部固定CTA（LINE→電話→メール の優先順） -->
+<div class="fixed-cta">
+  <a href="#" data-contact="line" class="line">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.94 2 10.7c0 3.02 1.86 5.68 4.66 7.24-.15.6-.86 3.3-.9 3.5 0 0-.02.15.08.2.1.06.22.02.22.02.3-.04 3.36-2.2 3.9-2.57.65.1 1.34.15 2.04.15 5.52 0 10-3.94 10-8.7S17.52 2 12 2z"/></svg>
+    LINE相談
+  </a>
+  <a href="#" data-contact="tel" class="tel">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+    電話相談
+  </a>
+  <a href="#" data-contact="mail" class="mail">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+    メール
+  </a>
+</div>
+
+<!-- トップに戻るボタン -->
+<button class="to-top" id="toTopBtn" aria-label="トップに戻る">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+/* ============================================================
+   連絡先設定（電話番号・LINE URL・メールアドレスの変更はここだけでOK）
+   ページ内の data-contact="tel/line/mail" 要素すべてに自動反映されます。
+============================================================ */
+const CONTACT_INFO = {
+  telDisplay: '0120-000-000',      // ← 電話番号（表示用）変更場所
+  telHref: 'tel:0120000000',       // ← 電話番号（発信用）変更場所
+  lineUrl: 'https://line.me/R/ti/p/@sakimori',   // ← LINE公式アカウントURL変更場所
+  mailDisplay: 'info@sakimori.co.jp',            // ← メールアドレス（表示用）変更場所
+  mailHref: 'mailto:info@sakimori.co.jp'         // ← メールアドレス（送信用）変更場所
+};
+
+document.querySelectorAll('[data-contact]').forEach(function (el) {
+  const type = el.getAttribute('data-contact');
+  if (type === 'tel') el.setAttribute('href', CONTACT_INFO.telHref);
+  if (type === 'line') el.setAttribute('href', CONTACT_INFO.lineUrl);
+  if (type === 'mail') el.setAttribute('href', CONTACT_INFO.mailHref);
+});
+document.querySelectorAll('[data-contact-text]').forEach(function (el) {
+  const type = el.getAttribute('data-contact-text');
+  if (type === 'tel') el.textContent = CONTACT_INFO.telDisplay;
+  if (type === 'mail') el.textContent = CONTACT_INFO.mailDisplay;
+});
+
+// 年号自動表示
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// ヘッダー：ファーストビューの背景に重なる透明状態から、スクロール後は白背景に切り替え
+const siteHeader = document.getElementById('siteHeader');
+function updateHeaderState() {
+  if (window.scrollY > 60) {
+    siteHeader.classList.add('scrolled');
+  } else {
+    siteHeader.classList.remove('scrolled');
+  }
+}
+window.addEventListener('scroll', updateHeaderState);
+updateHeaderState();
+
+// トップへ戻るボタンの表示制御
+const toTopBtn = document.getElementById('toTopBtn');
+window.addEventListener('scroll', function () {
+  if (window.scrollY > 400) {
+    toTopBtn.classList.add('visible');
+  } else {
+    toTopBtn.classList.remove('visible');
+  }
+});
+toTopBtn.addEventListener('click', function () {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// お問い合わせフォーム送信処理（デモ：実送信先が決まり次第、fetch部分を実装してください）
+const contactForm = document.getElementById('contact-form');
+const formMessage = document.getElementById('form-message');
+
+contactForm.addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const category = document.getElementById('category').value;
+
+  if (!name || !email || !category) {
+    showFormMessage('error', '必須項目が未入力です。お名前・メールアドレス・ご相談内容をご確認ください。');
+    return;
+  }
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    showFormMessage('error', 'メールアドレスの形式が正しくありません。');
+    return;
+  }
+
+  // ここで実際の送信処理（fetch等）を行う想定
+  // 例）fetch('/api/contact', { method:'POST', body: new FormData(contactForm) })
+
+  showFormMessage('success', 'お問い合わせありがとうございます。内容を確認のうえ、担当者より折り返しご連絡いたします。');
+  contactForm.reset();
+});
+
+function showFormMessage(type, text) {
+  formMessage.textContent = text;
+  formMessage.className = 'show ' + type;
+}
+</script>
+
+</body>
+</html>
