@@ -357,12 +357,14 @@ section.bg-sky{
   background-position:center, center;
   background-repeat:no-repeat;
 }
-/* 薄いネイビーのオーバーレイ：写真の鮮明さを保ちながら、文字の可読性と高級感を両立させます */
+/* ---- ヘッダー文字調整場所 ----
+   ネイビーのオーバーレイ：写真の鮮明さを保ちながら、文字の可読性と高級感を両立させます。
+   文字が乗る左側〜中央を少し濃く、右側は写真がよく見えるよう薄めにしています。 */
 .hero-overlay{
   position:absolute;
   inset:0;
   background:
-    linear-gradient(100deg, rgba(15,42,74,0.66) 0%, rgba(15,42,74,0.46) 55%, rgba(15,42,74,0.3) 85%, rgba(15,42,74,0.22) 100%);
+    linear-gradient(100deg, rgba(11,31,55,0.8) 0%, rgba(11,31,55,0.6) 55%, rgba(11,31,55,0.42) 85%, rgba(11,31,55,0.32) 100%);
 }
 .hero-inner{
   position:relative;
@@ -399,13 +401,14 @@ section.bg-sky{
   color:#fff;
   margin-bottom:20px;
   letter-spacing:0.01em;
-  text-shadow:0 2px 20px rgba(0,0,0,0.2);
+  text-shadow:0 1px 3px rgba(0,0,0,0.45), 0 4px 24px rgba(0,0,0,0.35);
 }
 .hero h1 .accent{color:var(--primary-light);}
 
 .hero .hero-desc{
-  color:rgba(255,255,255,0.9);
+  color:rgba(255,255,255,0.94);
   font-size:15px;
+  text-shadow:0 1px 10px rgba(0,0,0,0.3);
   margin-bottom:36px;
   line-height:1.9;
 }
@@ -858,8 +861,26 @@ section.bg-sky{
 .profile-message p:last-child{margin-bottom:0;}
 
 /* ============================================================
-   6. ご相談の流れ（STEP形式のロードマップ）
+   6. ご相談の流れ（画像1枚で構成）
 ============================================================ */
+.flow-visual-frame{
+  max-width:1000px;
+  margin:0 auto;
+  background:var(--secondary);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:14px;
+  box-shadow:var(--shadow-soft);
+}
+.flow-visual-frame img{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:var(--radius-md);
+}
+
+/* 旧STEP形式ロードマップ（現在は hidden 属性で非表示。画像を使わない場合はここに戻せます） */
+.flow-roadmap[hidden]{display:none;}
 .flow-roadmap{
   display:flex;
   flex-direction:column;
@@ -926,7 +947,7 @@ section.bg-sky{
   border-radius:var(--radius-md);
   padding:18px 18px;
 }
-.promise-mini h4{font-size:13.5px;font-weight:700;color:var(--navy);margin-bottom:3px;}
+.promise-mini h4{font-size:13.5px;font-weight:700;line-height:1.5;color:var(--navy);margin-bottom:4px;}
 .promise-mini p{font-size:12px;color:var(--text-sub);}
 
 /* ============================================================
@@ -1152,7 +1173,7 @@ section.bg-sky{
   /* PCでは文字が左側に収まるため、右側をよりクリアにして飛行機をくっきり見せる */
   .hero-overlay{
     background:
-      linear-gradient(100deg, rgba(255,255,255,0.84) 0%, rgba(255,255,255,0.55) 34%, rgba(255,255,255,0.2) 58%, rgba(255,255,255,0.08) 100%);
+      linear-gradient(100deg, rgba(11,31,55,0.82) 0%, rgba(11,31,55,0.6) 34%, rgba(11,31,55,0.32) 58%, rgba(11,31,55,0.16) 100%);
   }
 
   .section-head h2{font-size:31px;}
@@ -1178,6 +1199,8 @@ section.bg-sky{
   }
   .profile-card{padding:14px;margin:0;}
   .profile-inner{padding:20px 26px 26px;}
+
+  .flow-visual-frame{padding:24px;}
 
   .flow-roadmap{
     max-width:none;flex-direction:row;align-items:stretch;gap:0;
@@ -1348,9 +1371,9 @@ section.bg-sky{
 
       <!-- 信頼形成ポイント：代表からのひとこと -->
       <div class="trust-quote">
-        <!-- 代表者写真差替え場所（小） -->
+        <!-- 渡辺代表アイコン変更場所：現在 images/watanabe.jpg を使用中 -->
         <div class="trust-photo">
-          <img src="images/representative.jpg" alt="代表 渡辺琢哉"
+          <img src="images/watanabe.jpg" alt="代表 渡辺琢哉" style="object-position:center 30%;"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="photo-fallback" style="display:none;">渡</div>
         </div>
@@ -1516,8 +1539,9 @@ section.bg-sky{
 
       <div class="profile-layout">
         <div class="profile-card">
+          <!-- 代表プロフィール写真変更場所：現在 images/watanabe.jpg を使用中 -->
           <div class="profile-photo">
-            <img src="images/representative-main.jpg" alt="代表取締役 渡辺琢哉"
+            <img src="images/watanabe.jpg" alt="代表取締役 渡辺琢哉" style="object-position:center center;"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="photo-fallback-lg" style="display:none;">
               <span class="initial">渡辺</span>
@@ -1560,13 +1584,14 @@ section.bg-sky{
   ============================================================ -->
   <section id="flow">
     <div class="container">
-      <div class="section-head">
-        <span class="en-label">FLOW</span>
-        <h2>ご相談の流れ</h2>
-        <p class="lead">初回のお問い合わせから、実際のご相談までの流れをご紹介します。</p>
+      <!-- ---- ご相談の流れ画像変更場所 ----
+           images/flow-visual.jpg を使用しています。差し替える場合は同じファイル名で上書きしてください。
+           見出し・ステップ説明はすべて画像内に含まれているため、この画像1枚で完結する構成です。 -->
+      <div class="flow-visual-frame">
+        <img src="images/flow-visual.jpg" alt="ご相談の流れ：お問い合わせ、日程調整、無料相談・ヒアリング、ご提案・プラン設計、ご契約・アフターフォローの5ステップ">
       </div>
 
-      <div class="flow-roadmap">
+      <div class="flow-roadmap" hidden>
         <div class="flow-step-card">
           <div class="flow-step-circle">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
@@ -1666,7 +1691,7 @@ section.bg-sky{
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8l-8.5 8.5L4 12"/></svg>
               </div>
               <div>
-                <h4>強引な勧誘はしません</h4>
+                <h4>強引な勧誘は<br>いたしません</h4>
                 <p>ご自身のペースでご検討いただけます。</p>
               </div>
             </div>
