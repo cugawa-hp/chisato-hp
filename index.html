@@ -310,12 +310,6 @@ section.bg-sky{
 
 .header-actions{display:none;gap:10px;}
 .header-actions .btn{width:auto;padding:11px 18px;font-size:13px;}
-/* 透明ヘッダー時（スクロール前）、ダークなヒーロー写真の上でも電話ボタンが見えるよう白系に */
-.site-header:not(.scrolled) .header-actions .btn-tel{
-  background:rgba(255,255,255,0.1);
-  color:#fff;
-  border-color:rgba(255,255,255,0.7);
-}
 
 .pc-nav{display:none;}
 .pc-nav ul{display:flex;gap:22px;font-size:13.5px;font-weight:600;}
@@ -414,7 +408,7 @@ section.bg-sky{
 }
 
 .hero-cta{max-width:440px;}
-.hero-cta .btn-tel{background:rgba(255,255,255,0.1);color:#fff;border-color:rgba(255,255,255,0.7);}
+.hero-cta .btn-mail{background:rgba(255,255,255,0.1);color:#fff;border:1.5px solid rgba(255,255,255,0.7);box-shadow:none;}
 
 .hero-scroll-cue{
   position:absolute;
@@ -513,25 +507,19 @@ section.bg-sky{
 }
 .reason-point p{font-size:13px;color:var(--text-sub);}
 
-/* 代表からのひとこと（信頼形成ポイント：小さな顔写真＋一言） */
+/* 信頼形成ポイント：小さな顔写真＋代表者名（コンパクトな署名スタイル） */
 .trust-quote{
-  margin-top:40px;
-  background:var(--white);
-  border:1px solid var(--border);
-  border-radius:var(--radius-lg);
-  padding:26px 22px;
-  box-shadow:var(--shadow-soft);
+  margin-top:36px;
   display:flex;
-  flex-direction:column;
   align-items:center;
-  gap:16px;
-  text-align:center;
+  justify-content:center;
+  gap:14px;
 }
 /* ---- 代表者写真差替え場所（小）----
    images/representative.jpg を配置すると自動的に反映されます。 */
 .trust-photo{
-  width:64px;
-  height:64px;
+  width:60px;
+  height:60px;
   border-radius:50%;
   flex-shrink:0;
   overflow:hidden;
@@ -546,18 +534,23 @@ section.bg-sky{
   font-family:var(--font-base);
   font-size:20px;font-weight:700;
 }
-.trust-quote blockquote{
-  font-size:14.5px;
-  color:var(--text);
-  font-style:normal;
-  line-height:1.9;
-}
 .trust-quote cite{
   display:block;
-  margin-top:10px;
-  font-size:12px;
-  color:var(--text-sub);
+  text-align:left;
   font-style:normal;
+}
+.trust-quote cite .name-ja{
+  display:block;
+  font-family:var(--font-base);
+  font-size:15px;
+  font-weight:700;
+  color:var(--navy);
+}
+.trust-quote cite .name-role{
+  display:block;
+  margin-top:2px;
+  font-size:11.5px;
+  color:var(--text-sub);
 }
 
 /* ============================================================
@@ -626,15 +619,9 @@ section.bg-sky{
 }
 .invest-card p{font-size:13.5px;color:var(--text-sub);}
 
-.invest-cta{
-  margin-top:44px;
-  text-align:center;
-}
-.invest-cta .btn{max-width:340px;}
-
 /* 金融庁 資産運用シミュレーターへの導線カード（ゴールドは全体の中でこのCTAのみに限定使用） */
 .fsa-tool{
-  margin:32px auto 0;
+  margin:48px auto 0;
   max-width:600px;
   background:linear-gradient(180deg, #ffffff 0%, var(--gold-pale) 130%);
   border:1.5px solid var(--gold-accent-light);
@@ -788,12 +775,6 @@ section.bg-sky{
 }
 .partner-card .partner-mark svg{width:16px;height:16px;}
 .partner-card span{font-size:13.5px;font-weight:700;color:var(--navy);line-height:1.5;}
-.partners-note{
-  text-align:center;
-  font-size:12.5px;
-  color:var(--text-sub);
-  margin-top:28px;
-}
 
 /* ============================================================
    5. 代表プロフィール
@@ -897,16 +878,20 @@ section.bg-sky{
 .profile-message p{margin-bottom:14px;}
 .profile-message p:last-child{margin-bottom:0;}
 
+/* ---- ご相談の流れサイズ調整場所 ----
+   タイトルを少し大きく、画像の最大幅・余白も広げて見やすく高級感のある表示にしています。 */
 /* ============================================================
    6. ご相談の流れ（画像1枚で構成）
 ============================================================ */
+#flow .section-head{margin-bottom:32px;}
+#flow .section-head h2{font-size:27px;}
 .flow-visual-frame{
-  max-width:1000px;
+  max-width:1120px;
   margin:0 auto;
   background:var(--secondary);
   border:1px solid var(--border);
   border-radius:var(--radius-lg);
-  padding:14px;
+  padding:10px;
   box-shadow:var(--shadow-soft);
 }
 .flow-visual-frame img{
@@ -1111,45 +1096,26 @@ section.bg-sky{
   font-size:14px;font-weight:700;color:#fff;
 }
 .footer-info{font-size:13px;line-height:2.1;color:#9fb2c2;}
-/* 会社情報パネル：余白を取った、信頼感のある見せ方に */
-.company-info-panel{
-  background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.14);
-  border-radius:var(--radius-lg);
-  padding:8px 22px;
+/* 会社情報表示変更場所：カード形式をやめ、装飾を抑えたシンプルな羅列（定義リスト）形式に */
+.company-info{
   margin-top:22px;
-  max-width:420px;
+  max-width:340px;
 }
-.company-info-row{
-  display:flex;
-  gap:14px;
-  align-items:flex-start;
-  padding:16px 0;
-  border-bottom:1px solid rgba(255,255,255,0.1);
-}
-.company-info-row:last-child{border-bottom:none;}
-.company-info-row .info-icon{
-  width:36px;height:36px;
-  border-radius:50%;
-  background:rgba(255,255,255,0.1);
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-  color:var(--primary-light);
-}
-.company-info-row .info-icon svg{width:17px;height:17px;}
-.company-info-row .info-label{
-  font-size:10.5px;
+.company-info dt{
+  font-size:11px;
   letter-spacing:0.08em;
   color:#8fa4b8;
-  margin-bottom:4px;
+  margin-top:16px;
 }
-.company-info-row .info-value{
+.company-info dt:first-child{margin-top:0;}
+.company-info dd{
   font-size:14px;
-  color:#fff;
   font-weight:600;
+  color:#fff;
   line-height:1.7;
+  margin-top:2px;
 }
-.company-info-row .info-value a{color:#fff;}
+.company-info dd a{color:#fff;}
 .footer-nav{margin-top:30px;display:flex;flex-wrap:wrap;gap:14px 22px;font-size:13px;}
 .footer-nav a{color:#c4d2dd;}
 .footer-bottom{
@@ -1222,7 +1188,6 @@ section.bg-sky{
   .reason-visual{height:440px;}
   .reason-content{margin-top:-64px;}
   .reason-points{grid-template-columns:repeat(4,1fr);gap:36px;}
-  .trust-quote{flex-direction:row;text-align:left;padding:32px 36px;max-width:820px;}
 
   .invest-intro{font-size:16px;}
   .invest-intro-row{flex-direction:row;align-items:center;text-align:left;gap:44px;}
@@ -1241,7 +1206,8 @@ section.bg-sky{
   .profile-card{padding:14px;margin:0;}
   .profile-inner{padding:20px 26px 26px;}
 
-  .flow-visual-frame{padding:24px;}
+  .flow-visual-frame{padding:34px;}
+  #flow .section-head h2{font-size:34px;}
 
   .flow-roadmap{
     max-width:none;flex-direction:row;align-items:stretch;gap:0;
@@ -1300,11 +1266,11 @@ section.bg-sky{
       </ul>
     </nav>
 
-    <!-- PC用ヘッダーCTA：電話番号・LINE URLは script 内 CONTACT_INFO で一括管理しています -->
+    <!-- CTAボタン変更場所：電話相談ボタンを廃止し「LINE相談」をメイン導線に統一。LINE URLは script 内 CONTACT_INFO で一括管理しています -->
     <div class="header-actions">
-      <a href="#" data-contact="tel" class="btn btn-tel">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
-        電話で相談
+      <a href="#" data-contact="line" class="btn btn-line">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.94 2 10.7c0 3.02 1.86 5.68 4.66 7.24-.15.6-.86 3.3-.9 3.5 0 0-.02.15.08.2.1.06.22.02.22.02.3-.04 3.36-2.2 3.9-2.57.65.1 1.34.15 2.04.15 5.52 0 10-3.94 10-8.7S17.52 2 12 2z"/></svg>
+        LINE相談
       </a>
       <a href="#contact" class="btn btn-mail">お問い合わせ</a>
     </div>
@@ -1338,17 +1304,16 @@ section.bg-sky{
           人生設計から逆算した、長期的に安心できるご提案をいたします。
         </p>
 
-        <!-- ファーストビューCTA：LINE最優先 → 電話（ゴールド系アクセント） -->
+        <!-- CTAボタン変更場所：ファーストビューCTAをLINE最優先→お問い合わせに統一（電話相談ボタンは廃止） -->
         <div class="cta-group hero-cta">
           <!-- LINEリンク変更場所：URLは下部 script 内 CONTACT_INFO.lineUrl で一括管理しています -->
           <a href="#" data-contact="line" class="btn btn-line">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.94 2 10.7c0 3.02 1.86 5.68 4.66 7.24-.15.6-.86 3.3-.9 3.5 0 0-.02.15.08.2.1.06.22.02.22.02.3-.04 3.36-2.2 3.9-2.57.65.1 1.34.15 2.04.15 5.52 0 10-3.94 10-8.7S17.52 2 12 2z"/></svg>
             LINEで相談する
           </a>
-          <!-- 電話番号変更場所：番号は下部 script 内 CONTACT_INFO.telHref / telDisplay で一括管理しています -->
-          <a href="#" data-contact="tel" class="btn btn-tel">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
-            電話で相談する
+          <a href="#contact" class="btn btn-mail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            お問い合わせ
           </a>
         </div>
       </div>
@@ -1410,20 +1375,18 @@ section.bg-sky{
         </div>
       </div>
 
-      <!-- 信頼形成ポイント：代表からのひとこと -->
+      <!-- 文章削除場所：代表メッセージの引用文を削除し、写真＋名前のみのコンパクトな署名に変更 -->
       <div class="trust-quote">
-        <!-- 渡辺代表アイコン変更場所：現在 images/watanabe.jpg を使用中 -->
+        <!-- 渡辺代表アイコン変更場所：現在 images/representative.jpg（スーツ姿）を使用中 -->
         <div class="trust-photo">
-          <img src="images/watanabe.jpg" alt="代表 渡辺琢哉" style="object-position:center 30%;"
+          <img src="images/representative.jpg" alt="代表 渡辺琢哉"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="photo-fallback" style="display:none;">渡</div>
         </div>
-        <div>
-          <blockquote>
-            「お金の話は、人生の話でもあります。難しい専門用語を並べるのではなく、ご自身のこととして納得いただけるまで、丁寧にお話しすることを大切にしています。」
-          </blockquote>
-          <cite>代表取締役　渡辺 琢哉</cite>
-        </div>
+        <cite>
+          <span class="name-ja">渡辺 琢哉</span>
+          <span class="name-role">代表取締役｜株式会社SAKIMORI</span>
+        </cite>
       </div>
     </div>
   </section>
@@ -1471,12 +1434,7 @@ section.bg-sky{
         </div>
       </div>
 
-      <div class="invest-cta">
-        <a href="#" data-contact="line" class="btn btn-primary">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-1-7-4.5-7-9V6l7-3 7 3v6c0 4.5-3 8-7 9z"/></svg>
-          資産運用について相談する
-        </a>
-      </div>
+      <!-- CTAボタン変更場所：「資産運用について相談する」ボタンは削除（LINE相談・お問い合わせへ導線を統一） -->
 
       <!-- 金融庁 資産運用シミュレーターへの導線（外部リンク／新しいタブで開きます） -->
       <div class="fsa-tool">
@@ -1591,8 +1549,7 @@ section.bg-sky{
         <div class="partner-card"><span class="partner-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg></span><span>三井住友海上あいおい生命</span></div>
         <div class="partner-card"><span class="partner-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg></span><span>アクサ生命保険株式会社</span></div>
       </div>
-
-      <p class="partners-note">上記のほか、複数の保険会社とも提携しております。詳しくはお問い合わせください。</p>
+      <!-- 提携先文章削除場所：一覧下部の補足文は削除し、一覧のみで完結する構成に -->
     </div>
   </section>
 
@@ -1654,11 +1611,17 @@ section.bg-sky{
   ============================================================ -->
   <section id="flow">
     <div class="container">
+      <!-- ご相談の流れサイズ調整場所：タイトルをHTML側でも大きく表示し、画像だけに頼らず視認性を確保 -->
+      <div class="section-head">
+        <span class="en-label">FLOW</span>
+        <h2>ご相談の流れ</h2>
+      </div>
+
       <!-- ---- ご相談の流れ画像変更場所 ----
-           images/flow-visual.jpg を使用しています。差し替える場合は同じファイル名で上書きしてください。
-           見出し・ステップ説明はすべて画像内に含まれているため、この画像1枚で完結する構成です。 -->
+           images/flow-visual2.jpg を使用しています。差し替える場合は同じファイル名で上書きしてください。
+           ステップごとの詳細説明は画像内に含まれています。 -->
       <div class="flow-visual-frame">
-        <img src="images/flow-visual.jpg" alt="ご相談の流れ：お問い合わせ、日程調整、無料相談・ヒアリング、ご提案・プラン設計、ご契約・アフターフォローの5ステップ">
+        <img src="images/flow-visual2.jpg" alt="ご相談の流れ：お問い合わせ、日程調整、無料相談・ヒアリング、ご提案・プラン設計、ご契約・アフターフォローの5ステップ">
       </div>
 
       <div class="flow-roadmap" hidden>
@@ -1864,49 +1827,17 @@ section.bg-sky{
             <span class="logo-mark" style="display:none;">咲</span>
           </span>
         </div>
-        <!-- 会社情報：会社名・所在地・代表番号・FAXを、余白を取ったパネル形式で表示 -->
-        <div class="company-info-panel">
-          <div class="company-info-row">
-            <span class="info-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 8h1M9 12h1M9 16h1M14 8h1M14 12h1M14 16h1"/></svg>
-            </span>
-            <div>
-              <span class="info-label">会社名</span>
-              <span class="info-value">株式会社 SAKIMORI</span>
-            </div>
-          </div>
-          <div class="company-info-row">
-            <span class="info-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-            </span>
-            <div>
-              <span class="info-label">所在地</span>
-              <span class="info-value">〒273-0005<br>千葉県船橋市本町6-3-17<br>コンフォーレ船橋601</span>
-            </div>
-          </div>
-          <div class="company-info-row">
-            <span class="info-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
-            </span>
-            <div>
-              <span class="info-label">代表番号</span>
-              <span class="info-value"><a href="tel:0474063456">047-406-3456</a></span>
-            </div>
-          </div>
-          <div class="company-info-row">
-            <span class="info-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="8" width="14" height="8" rx="1"/><path d="M7 8V4h10v4M7 16v4h10v-4"/></svg>
-            </span>
-            <div>
-              <span class="info-label">FAX</span>
-              <span class="info-value">047-406-3456</span>
-            </div>
-          </div>
-        </div>
-        <div class="footer-info" style="margin-top:16px;">
-          Email：<span data-contact-text="mail">info@sakimori.co.jp</span><br>
-          代表取締役：渡辺 琢哉
-        </div>
+        <!-- 会社情報表示変更場所：カード形式をやめ、装飾を抑えたシンプルな羅列形式に変更。Email・代表取締役の行は削除 -->
+        <dl class="company-info">
+          <dt>会社名</dt>
+          <dd>株式会社 SAKIMORI</dd>
+          <dt>所在地</dt>
+          <dd>〒273-0005<br>千葉県船橋市本町6-3-17<br>コンフォーレ船橋601</dd>
+          <dt>代表番号</dt>
+          <dd><a href="tel:0474063456">047-406-3456</a></dd>
+          <dt>FAX</dt>
+          <dd>047-406-3456</dd>
+        </dl>
       </div>
 
       <nav class="footer-nav">
