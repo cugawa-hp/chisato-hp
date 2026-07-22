@@ -637,35 +637,70 @@ section.bg-sky{
 }
 
 /* ============================================================
-   4. 相談できる内容（個人のお客様向けサービス一覧・番号なしのカード形式）
+   4. 相談できる内容（写真付き・番号なしのリスト形式）
 ============================================================ */
-.service-grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:22px;
-  max-width:980px;
+.topics-layout{
+  max-width:1040px;
   margin:0 auto;
-}
-.service-card{
   background:var(--white);
-  border:1px solid var(--border);
   border-radius:var(--radius-lg);
-  padding:32px 26px;
-  box-shadow:var(--shadow-soft);
-  transition:transform .25s ease, box-shadow .25s ease;
+  overflow:hidden;
+  box-shadow:0 20px 46px rgba(31,78,121,0.14);
+  border:1px solid var(--border);
 }
-.service-card:hover{
-  transform:translateY(-3px);
-  box-shadow:0 18px 36px rgba(31,78,121,0.14);
+/* ---- 「ご相談いただける内容」写真差替え場所 ----
+   images/beach.jpg を使用しています。差し替える場合は同じファイル名で上書きしてください。
+   （推奨イメージ：家族や将来の安心を感じさせる写真。旅行感が出すぎないよう、
+   　薄いネイビーのオーバーレイと、下部の一言コピーで「人生設計・将来への備え」の文脈を添えています） */
+.topics-visual{
+  position:relative;
+  min-height:260px;
 }
-.service-card .icon-badge{margin-bottom:18px;}
-.service-card h3{
-  font-size:17px;
+.topics-visual img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  filter:saturate(0.92) contrast(1.04);
+}
+.topics-visual-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(165deg, rgba(31,78,121,0.62) 0%, rgba(31,78,121,0.28) 55%, rgba(31,78,121,0.5) 100%);
+}
+.topics-visual-caption{
+  position:absolute;
+  left:0;right:0;bottom:0;
+  padding:22px 26px;
+}
+.topics-visual-caption p{
+  font-family:var(--font-base);
+  color:#fff;
+  font-size:16px;
+  font-weight:700;
+  line-height:1.8;
+  text-shadow:0 2px 12px rgba(15,30,50,0.35);
+}
+
+.topics-list{background:var(--white);}
+.service-row{
+  display:flex;
+  gap:18px;
+  align-items:flex-start;
+  padding:26px 28px;
+  border-bottom:1px solid var(--border);
+  transition:background .2s ease;
+}
+.service-row:last-child{border-bottom:none;}
+.service-row:hover{background:var(--secondary);}
+.service-row .icon-badge{flex-shrink:0;}
+.service-row h3{
+  font-size:16px;
   font-weight:700;
   color:var(--navy);
-  margin-bottom:10px;
+  margin-bottom:6px;
 }
-.service-card p{font-size:13.5px;color:var(--text-sub);}
+.service-row p{font-size:13.5px;color:var(--text-sub);}
 /* 薄いグリーンのアクセントバリエーション（水色・ネイビーと交互に使用） */
 .icon-badge.green{background:#E8F5EC;color:#3D7A54;}
 
@@ -1007,7 +1042,6 @@ section.bg-sky{
 ============================================================ */
 @media (min-width:600px){
   .invest-grid{grid-template-columns:repeat(3,1fr);}
-  .service-grid{grid-template-columns:repeat(2,1fr);}
   .cta-group{flex-direction:row;max-width:none;}
   .promise-band{grid-template-columns:repeat(3,1fr);}
 }
@@ -1041,7 +1075,11 @@ section.bg-sky{
   .invest-photo{max-width:300px;}
   .invest-intro{text-align:left;margin:0;}
 
-  .service-grid{grid-template-columns:repeat(3,1fr);}
+  .topics-layout{display:flex;align-items:stretch;}
+  .topics-visual{flex:0 0 42%;min-height:auto;}
+  .topics-visual-caption{padding:30px;}
+  .topics-list{flex:1;display:flex;flex-direction:column;justify-content:center;}
+  .service-row{padding:22px 34px;}
 
   .profile-layout{
     display:grid;grid-template-columns:290px 1fr;gap:52px;align-items:start;
@@ -1290,56 +1328,69 @@ section.bg-sky{
       <div class="section-head">
         <span class="en-label">CONSULTING SERVICES</span>
         <h2>ご相談いただける内容</h2>
-        <p class="lead">「こんなこと聞いてもいいのかな」ということほど、お気軽にご相談ください。</p>
+        <p class="lead">人生のお金に関する不安や疑問を、一人ひとりに合わせて一緒に整理します。</p>
       </div>
 
-      <div class="service-grid">
-        <div class="service-card">
-          <div class="icon-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+      <div class="topics-layout">
+        <!-- ---- 「ご相談いただける内容」写真差替え場所：images/beach.jpg ---- -->
+        <div class="topics-visual">
+          <img src="images/beach.jpg" alt="大切な人と過ごす、穏やかな未来を表す写真">
+          <div class="topics-visual-overlay"></div>
+          <div class="topics-visual-caption">
+            <p>大切な人と過ごす、<br>穏やかな未来のために。</p>
           </div>
-          <h3>資産運用相談</h3>
-          <p>将来のお金の不安を整理し、一人ひとりに合わせた資産形成をサポートします。</p>
         </div>
 
-        <div class="service-card">
-          <div class="icon-badge green">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-1-7-4.5-7-9V6l7-3 7 3v6c0 4.5-3 8-7 9z"/></svg>
+        <div class="topics-list">
+          <div class="service-row">
+            <div class="icon-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+            </div>
+            <div>
+              <h3>資産運用相談</h3>
+              <p>将来に向けた資産形成について、現在の状況や目標に合わせた方法をご提案します。投資初心者の方にも分かりやすく説明します。</p>
+            </div>
           </div>
-          <h3>保険の見直し</h3>
-          <p>現在の生活や将来設計に合わせて、必要な保障を一緒に考えます。</p>
-        </div>
 
-        <div class="service-card">
-          <div class="icon-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 14c.7.7 1.8 1 3 1s2.3-.3 3-1"/><path d="M9 10h.01M15 10h.01"/></svg>
+          <div class="service-row">
+            <div class="icon-badge green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-1-7-4.5-7-9V6l7-3 7 3v6c0 4.5-3 8-7 9z"/></svg>
+            </div>
+            <div>
+              <h3>保険の見直し</h3>
+              <p>現在加入している保険が、本当に必要な内容なのかを一緒に確認します。ライフステージに合わせた保障設計を考えます。</p>
+            </div>
           </div>
-          <h3>老後資金の準備</h3>
-          <p>年金だけに頼らない、ゆとりある老後のための準備を一緒に考えます。</p>
-        </div>
 
-        <div class="service-card">
-          <div class="icon-badge green">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-4 10 4-10 4-10-4z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg>
+          <div class="service-row">
+            <div class="icon-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20l-5-2V4l5 2 6-2 5 2v14l-5-2-6 2z"/><path d="M9 6v14M15 4v14"/></svg>
+            </div>
+            <div>
+              <h3>ライフプラン相談</h3>
+              <p>結婚、住宅購入、教育資金、老後など、人生のイベントに合わせたお金の計画を整理します。</p>
+            </div>
           </div>
-          <h3>教育資金</h3>
-          <p>お子さまの将来の選択肢を広げるための、計画的な準備方法をご提案します。</p>
-        </div>
 
-        <div class="service-card">
-          <div class="icon-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l8-8 8 8"/><path d="M6 10v9h12v-9"/></svg>
+          <div class="service-row">
+            <div class="icon-badge green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 14c.7.7 1.8 1 3 1s2.3-.3 3-1"/><path d="M9 10h.01M15 10h.01"/></svg>
+            </div>
+            <div>
+              <h3>老後資金・将来への備え</h3>
+              <p>将来必要になる資金を把握し、安心できる未来への準備をサポートします。</p>
+            </div>
           </div>
-          <h3>家計改善</h3>
-          <p>収支の見える化から、無理なく続けられる家計改善の仕組みづくりを支援します。</p>
-        </div>
 
-        <div class="service-card">
-          <div class="icon-badge green">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20l-5-2V4l5 2 6-2 5 2v14l-5-2-6 2z"/><path d="M9 6v14M15 4v14"/></svg>
+          <div class="service-row">
+            <div class="icon-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l8-8 8 8"/><path d="M6 10v9h12v-9"/></svg>
+            </div>
+            <div>
+              <h3>家計改善・お金の整理</h3>
+              <p>毎月のお金の流れを見直し、無理なく将来へ備える方法を考えます。</p>
+            </div>
           </div>
-          <h3>ライフプラン設計</h3>
-          <p>人生設計に合わせた、長期的なお金の計画をご提案します。</p>
         </div>
       </div>
     </div>
