@@ -654,27 +654,31 @@ section.bg-sky{
 }
 .fsa-tool-title{color:var(--navy);font-size:17px;font-weight:700;margin-bottom:8px;letter-spacing:0.01em;}
 .fsa-tool-desc{color:var(--text-sub);font-size:12.5px;margin-bottom:20px;}
-.fsa-tool .btn{max-width:380px;margin:0 auto;}
+/* ---- 無料シミュレーションボタン強調場所 ----
+   サイズを一回り大きくし、グラデーション＋光彩でより目立たせています（派手な点滅・バナー感は避けています）。 */
+.fsa-tool .btn{max-width:420px;margin:0 auto;}
+.fsa-tool .btn-gold-cta{padding:19px 30px;font-size:16px;font-weight:700;}
+.fsa-tool .btn-gold-cta svg{width:22px;height:22px;}
 
 /* ゴールドCTAボタン（ゆっくりした浮き上がり＋影の変化＋控えめなパルス。派手な点滅はなし） */
 .btn-gold-cta{
-  background:var(--gold-accent-light);
+  background:linear-gradient(135deg, var(--gold-accent-light) 0%, var(--gold-accent) 100%);
   color:var(--navy);
-  border:1px solid var(--gold-accent);
-  box-shadow:0 10px 22px rgba(191,161,90,0.35);
+  border:1.5px solid var(--gold-accent);
+  box-shadow:0 12px 28px rgba(191,161,90,0.45);
   transition:transform .4s ease, box-shadow .4s ease, background .4s ease;
   animation:goldCtaPulse 3.2s ease-in-out infinite;
 }
 .btn-gold-cta:hover,
 .btn-gold-cta:focus-visible{
-  background:var(--gold-accent-hover);
-  transform:translateY(-2px);
-  box-shadow:0 18px 34px rgba(191,161,90,0.5);
+  background:linear-gradient(135deg, var(--gold-accent-hover) 0%, var(--gold-accent-light) 100%);
+  transform:translateY(-3px);
+  box-shadow:0 22px 40px rgba(191,161,90,0.6);
   animation-play-state:paused;
 }
 @keyframes goldCtaPulse{
-  0%,100%{box-shadow:0 10px 22px rgba(191,161,90,0.32);}
-  50%{box-shadow:0 10px 28px rgba(191,161,90,0.55);}
+  0%,100%{box-shadow:0 12px 28px rgba(191,161,90,0.4);}
+  50%{box-shadow:0 12px 34px rgba(191,161,90,0.65);}
 }
 
 /* ============================================================
@@ -745,36 +749,42 @@ section.bg-sky{
 /* 薄いグリーンのアクセントバリエーション（水色・ネイビーと交互に使用） */
 .icon-badge.green{background:#E8F5EC;color:#3D7A54;}
 
-/* ============================================================
-   提携先保険会社一覧追加場所（信頼性補強セクション）
-============================================================ */
+/* ---- 提携先ロゴ表示場所 ----
+   会社名テキストのみの表示から、imagesフォルダ内の各社ロゴ画像を使った
+   カード形式（ロゴ＋会社名）に変更しています。白背景・余白を広く取り、清潔感・高級感を意識しています。 */
 .partners-grid{
   display:grid;
-  grid-template-columns:1fr;
-  gap:14px;
-  max-width:900px;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+  max-width:1040px;
   margin:0 auto;
 }
 .partner-card{
   display:flex;
+  flex-direction:column;
   align-items:center;
+  justify-content:center;
   gap:12px;
   background:var(--white);
   border:1px solid var(--border);
   border-radius:var(--radius-md);
-  padding:16px 18px;
+  padding:24px 18px;
   box-shadow:var(--shadow-soft);
+  min-height:120px;
+  transition:transform .2s ease, box-shadow .2s ease;
 }
-.partner-card .partner-mark{
-  flex-shrink:0;
-  width:34px;height:34px;
-  border-radius:50%;
-  background:var(--secondary);
-  color:var(--primary-dark);
-  display:flex;align-items:center;justify-content:center;
+.partner-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 16px 32px rgba(31,78,121,0.12);
 }
-.partner-card .partner-mark svg{width:16px;height:16px;}
-.partner-card span{font-size:13.5px;font-weight:700;color:var(--navy);line-height:1.5;}
+.partner-card img{
+  max-width:100%;
+  max-height:40px;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+}
+.partner-card span{font-size:11.5px;font-weight:600;color:var(--text-sub);line-height:1.5;text-align:center;}
 
 /* ============================================================
    5. 代表プロフィール
@@ -995,8 +1005,11 @@ section.bg-sky{
   border-radius:50%;
   background:radial-gradient(circle,rgba(255,255,255,0.12),transparent 70%);
 }
+/* ---- LINEメッセージ文字サイズ調整場所 ----
+   スマホで自然に収まるよう、文字サイズを縮小し行間・改行を調整しています。 */
 .contact-cta-box h3{
-  font-size:17px;
+  font-size:15px;
+  line-height:1.6;
   color:#fff;
   text-align:center;
   margin-bottom:8px;
@@ -1160,7 +1173,7 @@ section.bg-sky{
 @media (min-width:600px){
   .invest-grid{grid-template-columns:repeat(3,1fr);}
   .cta-group{flex-direction:row;max-width:none;}
-  .partners-grid{grid-template-columns:repeat(2,1fr);}
+  .partners-grid{grid-template-columns:repeat(3,1fr);}
 }
 
 /* ============================================================
@@ -1171,7 +1184,7 @@ section.bg-sky{
   .pc-nav{display:block;}
   .header-actions{display:flex;}
   .logo img.logo-img{height:34px;}
-  .partners-grid{grid-template-columns:repeat(3,1fr);}
+  .partners-grid{grid-template-columns:repeat(4,1fr);}
 
   .hero-inner{padding-top:150px;padding-bottom:110px;}
   .hero h1{font-size:48px;}
@@ -1375,19 +1388,7 @@ section.bg-sky{
         </div>
       </div>
 
-      <!-- 文章削除場所：代表メッセージの引用文を削除し、写真＋名前のみのコンパクトな署名に変更 -->
-      <div class="trust-quote">
-        <!-- 渡辺代表アイコン変更場所：現在 images/representative.jpg（スーツ姿）を使用中 -->
-        <div class="trust-photo">
-          <img src="images/representative.jpg" alt="代表 渡辺琢哉"
-               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="photo-fallback" style="display:none;">渡</div>
-        </div>
-        <cite>
-          <span class="name-ja">渡辺 琢哉</span>
-          <span class="name-role">代表取締役｜株式会社SAKIMORI</span>
-        </cite>
-      </div>
+      <!-- 代表者表示削除場所：選ばれる理由セクション末尾の代表者署名（写真＋役職）を削除し、4つのポイントで完結する構成に -->
     </div>
   </section>
 
@@ -1536,20 +1537,21 @@ section.bg-sky{
         <p class="lead">多数の保険会社と提携しているからこそ、お客様に合わせた最適なご提案が可能です。</p>
       </div>
 
+      <!-- 提携先ロゴ表示場所：会社名テキストから、各社ロゴ画像（images/フォルダ内）を使ったカード表示に変更 -->
       <div class="partners-grid">
-        <div class="partner-card"><span class="partner-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg></span><span>オリックス生命</span></div>
-        <div class="partner-card"><span class="partner-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg></span><span>ＳＯＭＰＯひまわり生命</span></div>
-        <div class="partner-card"><span class="partner-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg></span><span>東京海上日動／東京海上日動あんしん生命</span></div>
-        <div class="partner-card"><span class="partner-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg></span><span>日本生命保険相互会社</span></div>
-        <div class="partner-card"><span class="partner-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg></span><span>第一ネオ生命保険株式会社</span></div>
-        <div class="partner-card"><span class="partner-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg></span><span>FWD生命</span></div>
-        <div class="partner-card"><span class="partner-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg></span><span>はなさく生命保険</span></div>
-        <div class="partner-card"><span class="partner-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg></span><span>チューリッヒ生命</span></div>
-        <div class="partner-card"><span class="partner-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg></span><span>あいおいニッセイ同和損保</span></div>
-        <div class="partner-card"><span class="partner-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg></span><span>三井住友海上あいおい生命</span></div>
-        <div class="partner-card"><span class="partner-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg></span><span>アクサ生命保険株式会社</span></div>
+        <div class="partner-card"><img src="images/orix.jpeg" alt="オリックス生命"><span>オリックス生命</span></div>
+        <div class="partner-card"><img src="images/sompo.jpeg" alt="ＳＯＭＰＯひまわり生命"><span>ＳＯＭＰＯひまわり生命</span></div>
+        <div class="partner-card"><img src="images/tokyokaijo.jpg" alt="東京海上日動／東京海上日動あんしん生命"><span>東京海上日動／東京海上日動あんしん生命</span></div>
+        <div class="partner-card"><img src="images/nissei.jpeg" alt="日本生命保険相互会社"><span>日本生命保険相互会社</span></div>
+        <div class="partner-card"><img src="images/hanasaku.jpeg" alt="はなさく生命保険"><span>はなさく生命保険</span></div>
+        <div class="partner-card"><img src="images/daiichi.jpg" alt="第一ネオ生命保険株式会社"><span>第一ネオ生命保険株式会社</span></div>
+        <div class="partner-card"><img src="images/fwd.jpeg" alt="FWD生命"><span>FWD生命</span></div>
+        <div class="partner-card"><img src="images/zurich.jpeg" alt="チューリッヒ生命"><span>チューリッヒ生命</span></div>
+        <div class="partner-card"><img src="images/aioi.jpeg" alt="あいおいニッセイ同和損保"><span>あいおいニッセイ同和損保</span></div>
+        <div class="partner-card"><img src="images/aioilife.jpeg" alt="三井住友海上あいおい生命"><span>三井住友海上あいおい生命</span></div>
+        <div class="partner-card"><img src="images/axalife.jpeg" alt="アクサ生命保険株式会社"><span>アクサ生命保険株式会社</span></div>
+        <div class="partner-card"><img src="images/axa.jpeg" alt="アクサダイレクト"><span>アクサダイレクト</span></div>
       </div>
-      <!-- 提携先文章削除場所：一覧下部の補足文は削除し、一覧のみで完結する構成に -->
     </div>
   </section>
 
@@ -1699,7 +1701,7 @@ section.bg-sky{
         <div>
           <!-- 優先度の高いCTA：LINE最優先 → 電話 → メール -->
           <div class="contact-cta-box">
-            <h3>LINEなら、最短で気軽に相談できます</h3>
+            <h3>LINEなら、<br>最短で気軽に相談できます</h3>
             <p class="cta-sub">友だち追加後、そのままチャット形式でご相談いただけます</p>
             <div class="cta-group" style="flex-direction:column;">
               <a href="#" data-contact="line" class="btn btn-line">
@@ -1827,16 +1829,14 @@ section.bg-sky{
             <span class="logo-mark" style="display:none;">咲</span>
           </span>
         </div>
-        <!-- 会社情報表示変更場所：カード形式をやめ、装飾を抑えたシンプルな羅列形式に変更。Email・代表取締役の行は削除 -->
+        <!-- 会社情報変更場所：シンプルな会社情報形式（会社名・所在地・電話番号のみ）。Email・代表取締役・FAXは非表示 -->
         <dl class="company-info">
           <dt>会社名</dt>
           <dd>株式会社 SAKIMORI</dd>
           <dt>所在地</dt>
           <dd>〒273-0005<br>千葉県船橋市本町6-3-17<br>コンフォーレ船橋601</dd>
-          <dt>代表番号</dt>
+          <dt>電話番号</dt>
           <dd><a href="tel:0474063456">047-406-3456</a></dd>
-          <dt>FAX</dt>
-          <dd>047-406-3456</dd>
         </dl>
       </div>
 
