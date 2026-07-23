@@ -899,82 +899,73 @@ section.bg-sky{
 .profile-message p{margin-bottom:14px;}
 .profile-message p:last-child{margin-bottom:0;}
 
-/* ---- ご相談の流れサイズ調整場所 ----
-   タイトルを少し大きく、画像の最大幅・余白も広げて見やすく高級感のある表示にしています。 */
+/* ---- ご相談の流れレイアウト変更場所 ----
+   画像1枚にテキストを埋め込む構成はスマホで文字が小さく潰れるため廃止し、
+   HTML/CSSで5ステップを表示。スマホでは1項目ずつ大きく縦に並べ、
+   900px以上では緩やかな弧を描く時計回り（時計の12時付近を左から右へなぞる）の横並びにしています。 */
 /* ============================================================
-   6. ご相談の流れ（画像1枚で構成）
+   6. ご相談の流れ
 ============================================================ */
-#flow .section-head{margin-bottom:32px;}
+#flow .section-head{margin-bottom:40px;}
 #flow .section-head h2{font-size:27px;}
-.flow-visual-frame{
-  max-width:1120px;
-  margin:0 auto;
-  background:var(--secondary);
-  border:1px solid var(--border);
-  border-radius:var(--radius-lg);
-  padding:10px;
-  box-shadow:var(--shadow-soft);
-}
-.flow-visual-frame img{
-  width:100%;
-  height:auto;
-  display:block;
-  border-radius:var(--radius-md);
-}
 
-/* 旧STEP形式ロードマップ（現在は hidden 属性で非表示。画像を使わない場合はここに戻せます） */
-.flow-roadmap[hidden]{display:none;}
 .flow-roadmap{
   display:flex;
   flex-direction:column;
+  align-items:center;
   gap:0;
-  max-width:760px;
+  max-width:440px;
   margin:0 auto;
 }
-.flow-step-card{
+.flow-step{
+  width:100%;
   background:var(--white);
   border:1px solid var(--border);
   border-radius:var(--radius-lg);
-  padding:28px 26px;
   box-shadow:var(--shadow-soft);
+  padding:34px 28px;
+  text-align:center;
   display:flex;
-  gap:20px;
-  align-items:flex-start;
+  flex-direction:column;
+  align-items:center;
 }
-.flow-step-circle{
-  flex-shrink:0;
-  width:58px;height:58px;
+.flow-step-num{
+  font-family:var(--font-base);
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:0.14em;
+  color:var(--gold-accent-dark);
+  margin-bottom:10px;
+}
+.flow-step-icon{
+  width:72px;height:72px;
   border-radius:50%;
   background:linear-gradient(160deg, var(--primary) 0%, var(--navy) 100%);
   color:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
+  margin-bottom:18px;
+  flex-shrink:0;
 }
-.flow-step-circle svg{width:26px;height:26px;}
-.flow-step-label{
-  display:block;
-  font-family:var(--font-base);
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:0.14em;
-  color:var(--primary-dark);
-  margin-bottom:6px;
-}
-.flow-step-body h3{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:6px;}
-.flow-step-body p{font-size:13.5px;color:var(--text-sub);}
-.flow-connector{
-  display:flex;
-  justify-content:center;
-  padding:6px 0;
-  color:var(--primary);
-  opacity:0.7;
-}
-.flow-connector svg{width:20px;height:20px;}
+.flow-step-icon svg{width:32px;height:32px;}
+.flow-step h3{font-size:19px;font-weight:700;color:var(--navy);margin-bottom:10px;line-height:1.4;}
+.flow-step p{font-size:14px;color:var(--text-sub);line-height:1.75;}
 
-/* ---- 強引な勧誘なし表示変更場所／提携先ロゴサイズ調整と同じ配置調整の一環 ----
-   3項目を横並びのアイコン＋文章ではなく、アイコンを上・文章を下にした縦配置にしています。
-   スマホでは3項目を縦に並べ、900px以上（PC）では3列均等グリッドにして高さを揃えています。 */
+.flow-arrow{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--primary);
+  opacity:0.65;
+  padding:14px 0;
+  transform:rotate(90deg);
+}
+.flow-arrow svg{width:26px;height:26px;}
+
+/* ---- 選ばれる理由画像カード変更場所 ----
+   3項目とも「画像タイル1枚（アイコン・タイトル・説明文を内包）」のカード形式に統一。
+   スマホでは3項目を縦一列に同じ幅・比率・余白で並べ、900px以上（PC）では3列均等グリッドにして高さを揃えています。 */
 .promise-band{
   display:flex;
   flex-direction:column;
@@ -986,20 +977,12 @@ section.bg-sky{
   display:flex;
   flex-direction:column;
   align-items:center;
-  text-align:center;
-  gap:10px;
   background:var(--white);
   border:1px solid var(--border);
   border-radius:var(--radius-md);
-  padding:26px 22px;
+  padding:14px;
 }
-.promise-mini h4{font-size:15px;font-weight:700;line-height:1.5;color:var(--navy);margin-bottom:2px;}
-.promise-mini p{font-size:12.5px;color:var(--text-sub);line-height:1.7;}
-/* ---- 強引な勧誘なし画像変更場所 ----
-   アイコン・見出し・説明文をすべて内包した1枚画像用のカード。
-   他の2項目（元自衛官／長期的なパートナー）のカードと余白・角丸を揃え、統一感を保っています。 */
-.promise-mini--image{padding:14px;}
-.promise-mini--image img{width:100%;height:auto;display:block;border-radius:calc(var(--radius-md) - 6px);}
+.promise-mini img{width:100%;height:auto;display:block;border-radius:calc(var(--radius-md) - 6px);}
 
 /* ============================================================
    7. お問い合わせ
@@ -1293,19 +1276,26 @@ section.bg-sky{
   .profile-card{padding:14px;margin:0;}
   .profile-inner{padding:20px 26px 26px;}
 
-  .flow-visual-frame{padding:34px;}
   #flow .section-head h2{font-size:34px;}
 
+  /* ---- ご相談の流れレイアウト変更場所（PC）----
+     5項目を横一列にしつつ、1→3を緩やかに上げ、3→5で下げる弧を描くことで
+     時計の12時付近を左から右へなぞるような「時計回り」の流れを表現しています。 */
   .flow-roadmap{
-    max-width:none;flex-direction:row;align-items:stretch;gap:0;
+    max-width:1180px;margin:56px auto 0;
+    flex-direction:row;align-items:flex-start;gap:0;
   }
-  .flow-step-card{
-    flex:1;flex-direction:column;text-align:center;align-items:center;
-    padding:32px 20px;
+  .flow-step{
+    flex:1;padding:30px 18px;min-height:300px;
   }
-  .flow-step-circle{margin-bottom:6px;}
-  .flow-connector{
-    flex-shrink:0;align-items:center;padding:0 4px;transform:rotate(-90deg);
+  .flow-step:nth-child(1){transform:translateY(34px);}
+  .flow-step:nth-child(3){transform:translateY(10px);}
+  .flow-step:nth-child(5){transform:translateY(-8px);}
+  .flow-step:nth-child(7){transform:translateY(10px);}
+  .flow-step:nth-child(9){transform:translateY(34px);}
+  .flow-arrow{
+    flex-shrink:0;align-self:center;padding:0 6px;margin-top:60px;
+    transform:rotate(0deg);
   }
 
   .contact-layout{
@@ -1613,20 +1603,23 @@ section.bg-sky{
 
       <!-- 提携先ロゴ表示場所：会社名テキストから、各社ロゴ画像（images/フォルダ内）を使ったカード表示に変更 -->
       <!-- 提携先ロゴサイズ調整場所：各ロゴをpx固定で拡大するのではなく、.logo-boxで表示領域を統一し「見た目の大きさ」を揃えている -->
+      <!-- 提携先保険会社並び順変更場所：あいうえお順に並び替え。
+           同一グループ（MS&AD／アクサ）は生保→損保の順で隣接配置しています。
+           アクサ生命保険株式会社→アクサ生命に表記を簡素化。 -->
       <div class="partners-grid">
+        <div class="partner-card"><div class="logo-box"><img src="images/aioilife.jpeg" alt="三井住友海上あいおい生命"></div><span>三井住友海上あいおい生命</span></div>
+        <div class="partner-card"><div class="logo-box"><img src="images/aioi.jpeg" alt="あいおいニッセイ同和損保"></div><span>あいおいニッセイ同和損保</span></div>
+        <!-- アクサ生命ロゴ修正場所：黒い外枠のない修正版ロゴ（images/axalife.jpeg）に差し替え -->
+        <div class="partner-card"><div class="logo-box"><img src="images/axalife.jpeg" alt="アクサ生命"></div><span>アクサ生命</span></div>
+        <div class="partner-card"><div class="logo-box"><img src="images/axa.jpeg" alt="アクサダイレクト"></div><span>アクサダイレクト</span></div>
+        <div class="partner-card"><div class="logo-box"><img src="images/fwd.jpeg" alt="FWD生命"></div><span>FWD生命</span></div>
         <div class="partner-card"><div class="logo-box"><img src="images/orix.jpeg" alt="オリックス生命"></div><span>オリックス生命</span></div>
         <div class="partner-card"><div class="logo-box"><img src="images/sompo.jpeg" alt="ＳＯＭＰＯひまわり生命"></div><span>ＳＯＭＰＯひまわり生命</span></div>
+        <div class="partner-card"><div class="logo-box"><img src="images/daiichi.jpg" alt="第一ネオ生命保険株式会社"></div><span>第一ネオ生命保険株式会社</span></div>
+        <div class="partner-card"><div class="logo-box"><img src="images/zurich.jpeg" alt="チューリッヒ生命"></div><span>チューリッヒ生命</span></div>
         <div class="partner-card"><div class="logo-box"><img src="images/tokyokaijo.jpg" alt="東京海上日動／東京海上日動あんしん生命"></div><span>東京海上日動／東京海上日動あんしん生命</span></div>
         <div class="partner-card"><div class="logo-box"><img src="images/nissei.jpeg" alt="日本生命保険相互会社"></div><span>日本生命保険相互会社</span></div>
         <div class="partner-card"><div class="logo-box"><img src="images/hanasaku.jpeg" alt="はなさく生命保険"></div><span>はなさく生命保険</span></div>
-        <div class="partner-card"><div class="logo-box"><img src="images/daiichi.jpg" alt="第一ネオ生命保険株式会社"></div><span>第一ネオ生命保険株式会社</span></div>
-        <div class="partner-card"><div class="logo-box"><img src="images/fwd.jpeg" alt="FWD生命"></div><span>FWD生命</span></div>
-        <div class="partner-card"><div class="logo-box"><img src="images/zurich.jpeg" alt="チューリッヒ生命"></div><span>チューリッヒ生命</span></div>
-        <div class="partner-card"><div class="logo-box"><img src="images/aioi.jpeg" alt="あいおいニッセイ同和損保"></div><span>あいおいニッセイ同和損保</span></div>
-        <div class="partner-card"><div class="logo-box"><img src="images/aioilife.jpeg" alt="三井住友海上あいおい生命"></div><span>三井住友海上あいおい生命</span></div>
-        <!-- アクサ生命ロゴ修正場所：黒い外枠のない修正版ロゴ（images/axalife.jpeg）に差し替え -->
-        <div class="partner-card"><div class="logo-box"><img src="images/axalife.jpeg" alt="アクサ生命保険株式会社"></div><span>アクサ生命保険株式会社</span></div>
-        <div class="partner-card"><div class="logo-box"><img src="images/axa.jpeg" alt="アクサダイレクト"></div><span>アクサダイレクト</span></div>
       </div>
     </div>
   </section>
@@ -1689,74 +1682,75 @@ section.bg-sky{
   ============================================================ -->
   <section id="flow">
     <div class="container">
-      <!-- ご相談の流れサイズ調整場所：タイトルをHTML側でも大きく表示し、画像だけに頼らず視認性を確保 -->
+      <!-- ご相談の流れレイアウト変更場所：画像1枚（テキスト埋め込み）表示だと
+           スマホで文字が潰れて読めなくなるため廃止し、HTML/CSSによる5ステップ表示に変更。
+           PCでは緩やかな弧を描く時計回りの配置、スマホでは1項目ずつ大きく縦に並ぶ構成にしています。 -->
       <div class="section-head">
         <span class="en-label">FLOW</span>
         <h2>ご相談の流れ</h2>
+        <p class="lead">初めての方でも安心してご相談いただけるよう、丁寧にサポートいたします。</p>
       </div>
 
-      <!-- ---- ご相談の流れ画像変更場所 ----
-           images/flow-visual2.jpg を使用しています。差し替える場合は同じファイル名で上書きしてください。
-           ステップごとの詳細説明は画像内に含まれています。 -->
-      <div class="flow-visual-frame">
-        <img src="images/flow-visual2.jpg" alt="ご相談の流れ：お問い合わせ、日程調整、無料相談・ヒアリング、ご提案・プラン設計、ご契約・アフターフォローの5ステップ">
-      </div>
-
-      <div class="flow-roadmap" hidden>
-        <div class="flow-step-card">
-          <div class="flow-step-circle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <div class="flow-roadmap">
+        <div class="flow-step">
+          <span class="flow-step-num">01</span>
+          <div class="flow-step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.4 8.4 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.8a8.4 8.4 0 0 1-.9-3.8A8.4 8.4 0 0 1 12.5 3h.1a8.4 8.4 0 0 1 8.4 8.4z"/></svg>
           </div>
-          <div class="flow-step-body">
-            <span class="flow-step-label">STEP 01</span>
-            <h3>ヒアリング</h3>
-            <p>お客様の現在の状況や、将来に対するご希望を丁寧に確認します。LINE・電話・フォームからお気軽にご連絡ください。</p>
-          </div>
+          <h3>お問い合わせ</h3>
+          <p>お電話・LINE・お問い合わせフォームからお気軽にご連絡ください。</p>
         </div>
 
-        <div class="flow-connector">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+        <div class="flow-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
         </div>
 
-        <div class="flow-step-card">
-          <div class="flow-step-circle">
+        <div class="flow-step">
+          <span class="flow-step-num">02</span>
+          <div class="flow-step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+          </div>
+          <h3>日程調整</h3>
+          <p>ご都合の良い日時を調整し、面談の日程を決定します。（オンライン対応も可能です）</p>
+        </div>
+
+        <div class="flow-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="flow-step">
+          <span class="flow-step-num">03</span>
+          <div class="flow-step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.3a3 3 0 0 1 0 5.8"/><path d="M21 20c0-2.6-1.7-4.8-4-5.6"/></svg>
+          </div>
+          <h3>無料相談・<br>ヒアリング</h3>
+          <p>現在の状況や将来の目標、不安や疑問を丁寧にお伺いします。</p>
+        </div>
+
+        <div class="flow-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="flow-step">
+          <span class="flow-step-num">04</span>
+          <div class="flow-step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+          </div>
+          <h3>ご提案・<br>プラン設計</h3>
+          <p>お客様一人ひとりに合わせた最適なプランをご提案いたします。</p>
+        </div>
+
+        <div class="flow-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="flow-step">
+          <span class="flow-step-num">05</span>
+          <div class="flow-step-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/><path d="M9.5 12l1.8 1.8L15 10.2"/></svg>
           </div>
-          <div class="flow-step-body">
-            <span class="flow-step-label">STEP 02</span>
-            <h3>リスク分析</h3>
-            <p>お伺いした内容をもとに、今必要な保障や見直すべき課題を整理し、優先順位を明確にします。</p>
-          </div>
-        </div>
-
-        <div class="flow-connector">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
-        </div>
-
-        <div class="flow-step-card">
-          <div class="flow-step-circle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
-          </div>
-          <div class="flow-step-body">
-            <span class="flow-step-label">STEP 03</span>
-            <h3>ご提案</h3>
-            <p>整理した課題をもとに、最適なプランをご案内します。その場での即決は求めませんので、じっくりご検討ください。</p>
-          </div>
-        </div>
-
-        <div class="flow-connector">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
-        </div>
-
-        <div class="flow-step-card">
-          <div class="flow-step-circle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-          </div>
-          <div class="flow-step-body">
-            <span class="flow-step-label">STEP 04</span>
-            <h3>アフターフォロー</h3>
-            <p>ご契約後も定期的なフォローアップを実施。結婚・出産・住宅購入などの節目で、改めてプランを見直します。</p>
-          </div>
+          <h3>ご契約・<br>アフターフォロー</h3>
+          <p>ご契約後も定期的に見直しを行い、長期的にサポートいたします。</p>
         </div>
       </div>
     </div>
@@ -1802,25 +1796,18 @@ section.bg-sky{
             </div>
           </div>
 
-          <!-- 強引な勧誘なし画像変更場所：アイコン＋タイトル＋説明文のテキスト表示を廃止し、
-               images/強引な勧誘はしません.jpeg から切り出した1枚の画像（images/promise-no-pressure-tile.jpg）で表示 -->
+          <!-- 選ばれる理由画像カード変更場所：3項目とも images/強引な勧誘はしません.jpeg から
+               切り出した画像タイルに統一（アイコン・タイトル・説明文を1枚の画像として使用）。
+               画像はそのまま切り出しただけで加工は行わず、3枚とも同じ大きさ・比率・余白で表示しています。 -->
           <div class="promise-band">
-            <div class="promise-mini promise-mini--image">
+            <div class="promise-mini">
               <img src="images/promise-no-pressure-tile.jpg" alt="強引な勧誘はいたしません。ご自身のペースでご検討いただけます。">
             </div>
             <div class="promise-mini">
-              <div class="icon-badge" style="width:48px;height:48px;">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/><path d="M9.5 12l1.8 1.8L15 10.2"/></svg>
-              </div>
-              <h4>元自衛官による<br>誠実なサポート</h4>
-              <p>規律と責任感を大切に、丁寧に対応いたします。</p>
+              <img src="images/promise-integrity-tile.jpg" alt="元自衛官による誠実なサポート。規律と責任感を大切に、丁寧に対応いたします。">
             </div>
             <div class="promise-mini">
-              <div class="icon-badge green" style="width:48px;height:48px;">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="12" r="6.5"/><circle cx="15" cy="12" r="6.5"/></svg>
-              </div>
-              <h4>長期的な<br>パートナー</h4>
-              <p>一度きりではなく、長くお付き合いできる関係を大切にしています。</p>
+              <img src="images/promise-partner-tile.jpg" alt="長期的なパートナー。一度きりではなく、長くお付き合いできる関係を大切にしています。">
             </div>
           </div>
         </div>
