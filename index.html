@@ -825,35 +825,39 @@ section.bg-sky{
 /* ============================================================
    5. 代表プロフィール
 ============================================================ */
-.profile-card{
-  background:var(--white);
-  border:1px solid var(--border);
-  border-radius:var(--radius-lg);
-  padding:10px;
-  box-shadow:var(--shadow-soft);
-  overflow:hidden;
-  max-width:260px;
-  margin:0 auto;
+/* ---- 代表プロフィールデザイン変更場所 ----
+   「会社紹介」ではなく「代表者への信頼形成」を重視したレイアウトに刷新。
+   写真を大きく印象的に、本文は見出し＋短文＋余白で読みやすく、
+   信頼できる理由を独立したカードとして下部に配置しています。 */
+.profile-hero{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:32px;
+  margin-bottom:44px;
 }
-.profile-inner{padding:26px 20px 30px;}
-
+.profile-photo-frame{
+  background:linear-gradient(160deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.04) 100%);
+  border:1px solid rgba(255,255,255,0.26);
+  border-radius:var(--radius-lg);
+  padding:14px;
+  box-shadow:0 26px 54px rgba(4,14,26,0.4);
+  max-width:300px;
+  width:100%;
+}
 /* ---- 代表者写真差替え場所（大）----
-   images/representative-main.jpg を配置すると自動的に反映されます（推奨：縦長・正面・清潔感のある構図）。
-   写真を大きく見せすぎないよう、カード幅は控えめ（最大260px）に設定しています。 */
+   images/representative-main.jpg を配置すると自動的に反映されます。
+   写真本来の縦横比（350×573）に表示領域を合わせているため、
+   人物が切れたり左右に寄ったりせず、写真全体が自然に大きく表示されます。 */
 .profile-photo{
   width:100%;
-  aspect-ratio:4/5;
+  aspect-ratio:350/573;
   border-radius:var(--radius-md);
   overflow:hidden;
   background:linear-gradient(160deg,var(--primary),var(--navy));
   position:relative;
 }
-/* 写真の直下に名前・役職をセットで表示するキャプション */
-.profile-caption{
-  text-align:center;
-  padding:16px 8px 8px;
-}
-.profile-photo img{width:100%;height:100%;object-fit:cover;}
+.profile-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;}
 .profile-photo .photo-fallback-lg{
   width:100%;height:100%;
   display:flex;align-items:center;justify-content:center;
@@ -879,18 +883,22 @@ section.bg-sky{
 .profile-photo .frame-corner.tl{top:14px;left:14px;border-right:none;border-bottom:none;}
 .profile-photo .frame-corner.br{bottom:14px;right:14px;border-left:none;border-top:none;}
 
-.profile-caption .name-ja{
-  font-family:var(--font-base);
-  font-size:19px;
-  font-weight:700;
-  color:var(--navy);
-}
-.profile-caption .name-role{
+.profile-intro{width:100%;text-align:center;}
+.profile-intro .profile-eyebrow{
   display:block;
-  font-size:12.5px;
-  color:var(--text-sub);
-  margin-top:5px;
-  letter-spacing:0.03em;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:0.12em;
+  color:var(--primary-light);
+  margin-bottom:10px;
+}
+.profile-intro .profile-name{
+  font-family:var(--font-base);
+  font-size:25px;
+  font-weight:700;
+  color:#fff;
+  letter-spacing:0.04em;
+  margin-bottom:24px;
 }
 /* 代表プロフィールの本文パネル：背景写真の上でも読みやすいよう、すりガラス調のパネルに */
 .profile-text-panel{
@@ -898,95 +906,69 @@ section.bg-sky{
   backdrop-filter:blur(8px);
   border:1px solid rgba(255,255,255,0.18);
   border-radius:var(--radius-lg);
-  padding:28px 24px;
+  padding:26px 24px;
+  text-align:left;
+  max-width:560px;
+  margin:0 auto;
 }
-.profile-badges{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin:0 0 22px;
+/* 文章を「見出し＋短文」の3ブロックに分け、余白で区切って読みやすく */
+.profile-message-block + .profile-message-block{
+  margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.14);
 }
-.profile-badges span{
-  background:rgba(255,255,255,0.14);
-  color:#fff;
-  font-size:11px;
-  font-weight:700;
-  padding:6px 12px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,0.28);
+.profile-message-block h4{
+  font-size:13px;font-weight:700;letter-spacing:0.03em;
+  color:var(--primary-light);margin-bottom:8px;
 }
-.profile-message{
-  font-size:14px;
-  color:rgba(255,255,255,0.85);
-  border-top:1px solid rgba(255,255,255,0.18);
-  padding-top:20px;
-}
-.profile-message p{margin-bottom:14px;}
-.profile-message p:last-child{margin-bottom:0;}
+.profile-message-block p{font-size:14px;line-height:1.85;color:rgba(255,255,255,0.85);}
 
-/* ---- ご相談の流れレイアウト変更場所 ----
-   画像1枚にテキストを埋め込む構成はスマホで文字が小さく潰れるため廃止し、
-   HTML/CSSで5ステップを表示。スマホでは1項目ずつ大きく縦に並べ、
-   900px以上では緩やかな弧を描く時計回り（時計の12時付近を左から右へなぞる）の横並びにしています。 */
+/* ---- 信頼ポイントカード追加場所 ----
+   代表者を信頼できる理由を、白背景の独立したカードで端的に伝えます。 */
+.profile-trust-grid{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  max-width:900px;
+  margin:0 auto;
+}
+.profile-trust-card{
+  background:var(--white);
+  border:1px solid rgba(255,255,255,0.5);
+  border-radius:var(--radius-md);
+  padding:26px 22px;
+  text-align:center;
+  box-shadow:0 16px 34px rgba(4,14,26,0.2);
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.profile-trust-card:hover{transform:translateY(-4px);box-shadow:0 22px 44px rgba(4,14,26,0.26);}
+.profile-trust-card .icon-badge{margin:0 auto 14px;}
+.profile-trust-card h4{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.profile-trust-card p{font-size:13px;color:var(--text-sub);line-height:1.75;}
+
+/* ---- ご相談の流れ画像変更場所 ----
+   images/ご相談の流れ.jpeg（1→5が時計回りの円形で自然につながるデザイン済み画像）を使用。
+   単に貼るのではなく、白背景の枠・角丸・軽い影を付けて現在のHPデザインになじませています。
+   スマホは幅に合わせて縮小、PCはセクションの主役として大きく表示します。 */
 /* ============================================================
    6. ご相談の流れ
 ============================================================ */
 #flow .section-head{margin-bottom:40px;}
 #flow .section-head h2{font-size:27px;}
 
-.flow-roadmap{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:0;
-  max-width:440px;
+.flow-visual-frame{
+  max-width:640px;
   margin:0 auto;
-}
-.flow-step{
-  width:100%;
   background:var(--white);
   border:1px solid var(--border);
   border-radius:var(--radius-lg);
-  box-shadow:var(--shadow-soft);
-  padding:34px 28px;
-  text-align:center;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+  padding:12px;
+  box-shadow:0 20px 46px rgba(31,78,121,0.14);
 }
-.flow-step-num{
-  font-family:var(--font-base);
-  font-size:14px;
-  font-weight:700;
-  letter-spacing:0.14em;
-  color:var(--gold-accent-dark);
-  margin-bottom:10px;
+.flow-visual-frame img{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:calc(var(--radius-lg) - 6px);
 }
-.flow-step-icon{
-  width:72px;height:72px;
-  border-radius:50%;
-  background:linear-gradient(160deg, var(--primary) 0%, var(--navy) 100%);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin-bottom:18px;
-  flex-shrink:0;
-}
-.flow-step-icon svg{width:32px;height:32px;}
-.flow-step h3{font-size:19px;font-weight:700;color:var(--navy);margin-bottom:10px;line-height:1.4;}
-.flow-step p{font-size:14px;color:var(--text-sub);line-height:1.75;}
-
-.flow-arrow{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--primary);
-  opacity:0.65;
-  padding:14px 0;
-  transform:rotate(90deg);
-}
-.flow-arrow svg{width:26px;height:26px;}
 
 /* ---- 選ばれる理由画像カード変更場所 ----
    3項目とも「画像タイル1枚（アイコン・タイトル・説明文を内包）」のカード形式に統一。
@@ -1392,33 +1374,22 @@ section.bg-sky{
   .topics-list{flex:1;display:flex;flex-direction:column;justify-content:center;}
   .service-row{padding:22px 34px;}
 
-  .profile-layout{
-    display:grid;grid-template-columns:290px 1fr;gap:52px;align-items:start;
-  }
-  .profile-card{padding:14px;margin:0;}
-  .profile-inner{padding:20px 26px 26px;}
+  /* ---- 代表プロフィールデザイン変更場所（PC）----
+     左：写真／右：氏名・肩書・プロフィール文。信頼ポイントカードは下部で横並び3列に。 */
+  .profile-hero{flex-direction:row;align-items:center;text-align:left;gap:56px;margin-bottom:56px;}
+  .profile-photo-frame{max-width:340px;flex-shrink:0;}
+  .profile-intro{text-align:left;}
+  .profile-intro .profile-eyebrow,
+  .profile-intro .profile-name{text-align:left;}
+  .profile-text-panel{margin:0;max-width:none;}
+  .profile-trust-grid{flex-direction:row;}
+  .profile-trust-card{flex:1;}
 
   #flow .section-head h2{font-size:34px;}
 
-  /* ---- ご相談の流れレイアウト変更場所（PC）----
-     5項目を横一列にしつつ、1→3を緩やかに上げ、3→5で下げる弧を描くことで
-     時計の12時付近を左から右へなぞるような「時計回り」の流れを表現しています。 */
-  .flow-roadmap{
-    max-width:1180px;margin:56px auto 0;
-    flex-direction:row;align-items:flex-start;gap:0;
-  }
-  .flow-step{
-    flex:1;padding:30px 18px;min-height:300px;
-  }
-  .flow-step:nth-child(1){transform:translateY(34px);}
-  .flow-step:nth-child(3){transform:translateY(10px);}
-  .flow-step:nth-child(5){transform:translateY(-8px);}
-  .flow-step:nth-child(7){transform:translateY(10px);}
-  .flow-step:nth-child(9){transform:translateY(34px);}
-  .flow-arrow{
-    flex-shrink:0;align-self:center;padding:0 6px;margin-top:60px;
-    transform:rotate(0deg);
-  }
+  /* ---- ご相談の流れ画像変更場所（PC）----
+     セクションの主役として大きく表示（最大880px）。 */
+  .flow-visual-frame{max-width:880px;padding:20px;}
 
   .contact-layout{
     display:grid;grid-template-columns:0.85fr 1.15fr;gap:44px;align-items:flex-start;
@@ -1758,15 +1729,19 @@ section.bg-sky{
       <div class="section-head" data-reveal="up">
         <span class="en-label">REPRESENTATIVE</span>
         <h2>代表プロフィール</h2>
-        <p class="lead">現場で「備え」の重さを知る一人として、皆さまと向き合っています。</p>
+        <p class="lead">「この人になら、安心して相談できる」。そう感じていただけるよう、想いをお伝えします。</p>
       </div>
 
-      <!-- セクション表示アニメーション場所：写真は左から、プロフィール文は右からスライド表示 -->
-      <div class="profile-layout">
-        <div class="profile-card" data-reveal="left">
-          <!-- 代表プロフィール写真変更場所：現在 images/representative-main.jpg（スーツ姿）を使用中 -->
+      <!-- 代表プロフィールデザイン変更場所：会社紹介ではなく代表者個人への信頼形成を軸にしたレイアウトに刷新。
+           写真は左、氏名・肩書・プロフィール文は右に配置し（スマホは縦積み）、
+           見出し＋短文＋余白で読みやすく、信頼ポイントは下部の独立カードで端的に伝えています。
+           写真は左から、氏名・本文は右からスライド表示します。 -->
+      <div class="profile-hero">
+        <div class="profile-photo-frame" data-reveal="left">
+          <!-- 代表プロフィール写真変更場所：現在 images/representative-main.jpg（スーツ姿）を使用中。
+               写真本来の縦横比に表示領域を合わせているため、人物が切れたり左右に寄ったりしません。 -->
           <div class="profile-photo">
-            <img src="images/representative-main.jpg" alt="代表取締役 渡辺琢哉" style="object-position:center 42%;"
+            <img src="images/representative-main.jpg" alt="代表取締役 渡辺琢哉"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="photo-fallback-lg" style="display:none;">
               <span class="initial">渡辺</span>
@@ -1775,30 +1750,51 @@ section.bg-sky{
             <span class="frame-corner tl"></span>
             <span class="frame-corner br"></span>
           </div>
-          <!-- 写真と自然にセットで見せる名前・役職 -->
-          <div class="profile-caption">
-            <span class="name-ja">渡辺 琢哉</span>
-            <span class="name-role">代表取締役｜株式会社SAKIMORI</span>
-          </div>
         </div>
 
-        <div class="profile-text-panel" data-reveal="right">
-          <div class="profile-badges">
-            <span>元自衛官</span>
-            <span>金融セミナー講師</span>
-            <span>ライフプランアドバイザー</span>
+        <div class="profile-intro" data-reveal="right">
+          <span class="profile-eyebrow">株式会社SAKIMORI　代表取締役</span>
+          <h3 class="profile-name">渡辺 琢哉</h3>
+
+          <div class="profile-text-panel">
+            <div class="profile-message-block">
+              <h4>自衛官としての原点</h4>
+              <p>自衛官として勤務していた経験の中で、「もしもの備え」の重みを間近で感じてきました。金融の知識を届けることで、一人でも多くの人の不安を減らしたい。その想いで、この会社を立ち上げました。</p>
+            </div>
+            <div class="profile-message-block">
+              <h4>分かりやすさへのこだわり</h4>
+              <p>金融セミナーや個別相談を通じて、難しい専門用語はできる限り使わず、「自分ごと」として理解していただけるようお話しすることを心がけています。</p>
+            </div>
+            <div class="profile-message-block">
+              <h4>長くお付き合いできる関係を</h4>
+              <p>お金の話は、人生の話でもあります。一度きりのご提案ではなく、長くお付き合いできる相談相手として、ぜひ頼っていただければ嬉しいです。</p>
+            </div>
           </div>
-          <div class="profile-message">
-            <p>
-              自衛官として勤務していた経験の中で、「もしもの備え」の重みを間近で感じてきました。その経験から、金融の知識を届けることで一人でも多くの人の不安を減らしたいという想いで、この会社を立ち上げました。
-            </p>
-            <p>
-              現在は自衛官や一般のお客様向けに金融セミナーを行いながら、個別相談にも力を入れています。難しい専門用語はできる限り使わず、「自分ごと」として理解していただけるようお話しすることを心がけています。
-            </p>
-            <p>
-              お金の話は、人生の話でもあります。一度きりのご提案ではなく、長くお付き合いできる相談相手として、ぜひ頼っていただければ嬉しいです。
-            </p>
+        </div>
+      </div>
+
+      <!-- 信頼ポイントカード追加場所：代表者を信頼できる理由を、独立したカードで端的に伝える -->
+      <div class="profile-trust-grid" data-reveal-group="120">
+        <div class="profile-trust-card" data-reveal="up">
+          <div class="icon-badge gold">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/><path d="M9.5 12l1.8 1.8L15 10.2"/></svg>
           </div>
+          <h4>元自衛官として培った責任感</h4>
+          <p>規律と誠実さを胸に、一つひとつのご相談に真摯に向き合います。</p>
+        </div>
+        <div class="profile-trust-card" data-reveal="up">
+          <div class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.3a3 3 0 0 1 0 5.8"/><path d="M21 20c0-2.6-1.7-4.8-4-5.6"/></svg>
+          </div>
+          <h4>一人ひとりに寄り添う提案</h4>
+          <p>画一的な商品ありきではなく、お客様の状況やご希望に合わせて考えます。</p>
+        </div>
+        <div class="profile-trust-card" data-reveal="up">
+          <div class="icon-badge green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="12" r="6.5"/><circle cx="15" cy="12" r="6.5"/></svg>
+          </div>
+          <h4>長期的な関係を大切にする姿勢</h4>
+          <p>一度きりのご提案で終わらせず、人生の変化に合わせて長くお付き合いします。</p>
         </div>
       </div>
     </div>
@@ -1809,77 +1805,17 @@ section.bg-sky{
   ============================================================ -->
   <section id="flow">
     <div class="container">
-      <!-- ご相談の流れレイアウト変更場所：画像1枚（テキスト埋め込み）表示だと
-           スマホで文字が潰れて読めなくなるため廃止し、HTML/CSSによる5ステップ表示に変更。
-           PCでは緩やかな弧を描く時計回りの配置、スマホでは1項目ずつ大きく縦に並ぶ構成にしています。 -->
+      <!-- ご相談の流れ画像変更場所：HTML/CSSの5ステップ表示から、
+           images/ご相談の流れ.jpeg（1〜5が時計回りに自然につながる、既にデザイン済みの画像）に変更。
+           白背景の枠・角丸・軽い影を付けて現在のHPデザインになじませています。 -->
       <div class="section-head" data-reveal="up">
         <span class="en-label">FLOW</span>
         <h2>ご相談の流れ</h2>
         <p class="lead">初めての方でも安心してご相談いただけるよう、丁寧にサポートいたします。</p>
       </div>
 
-      <!-- セクション表示アニメーション場所：1→2→3→4→5の順に表示。矢印にも控えめなフェードインを付与し、流れを感じられるように -->
-      <div class="flow-roadmap" data-reveal-group="180">
-        <div class="flow-step" data-reveal="fade">
-          <span class="flow-step-num">01</span>
-          <div class="flow-step-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.4 8.4 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.8a8.4 8.4 0 0 1-.9-3.8A8.4 8.4 0 0 1 12.5 3h.1a8.4 8.4 0 0 1 8.4 8.4z"/></svg>
-          </div>
-          <h3>お問い合わせ</h3>
-          <p>お電話・LINE・お問い合わせフォームからお気軽にご連絡ください。</p>
-        </div>
-
-        <div class="flow-arrow" data-reveal="fade">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-        </div>
-
-        <div class="flow-step" data-reveal="fade">
-          <span class="flow-step-num">02</span>
-          <div class="flow-step-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
-          </div>
-          <h3>日程調整</h3>
-          <p>ご都合の良い日時を調整し、面談の日程を決定します。（オンライン対応も可能です）</p>
-        </div>
-
-        <div class="flow-arrow" data-reveal="fade">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-        </div>
-
-        <div class="flow-step" data-reveal="fade">
-          <span class="flow-step-num">03</span>
-          <div class="flow-step-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.3a3 3 0 0 1 0 5.8"/><path d="M21 20c0-2.6-1.7-4.8-4-5.6"/></svg>
-          </div>
-          <h3>無料相談・<br>ヒアリング</h3>
-          <p>現在の状況や将来の目標、不安や疑問を丁寧にお伺いします。</p>
-        </div>
-
-        <div class="flow-arrow" data-reveal="fade">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-        </div>
-
-        <div class="flow-step" data-reveal="fade">
-          <span class="flow-step-num">04</span>
-          <div class="flow-step-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
-          </div>
-          <h3>ご提案・<br>プラン設計</h3>
-          <p>お客様一人ひとりに合わせた最適なプランをご提案いたします。</p>
-        </div>
-
-        <div class="flow-arrow" data-reveal="fade">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-        </div>
-
-        <div class="flow-step" data-reveal="fade">
-          <span class="flow-step-num">05</span>
-          <div class="flow-step-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/><path d="M9.5 12l1.8 1.8L15 10.2"/></svg>
-          </div>
-          <h3>ご契約・<br>アフターフォロー</h3>
-          <p>ご契約後も定期的に見直しを行い、長期的にサポートいたします。</p>
-        </div>
+      <div class="flow-visual-frame" data-reveal="up">
+        <img src="images/ご相談の流れ.jpeg" alt="ご相談の流れ：1.ヒアリング　2.プランご提案　3.ご検討　4.ご契約・アフターフォロー　5.安心の未来へ、の5ステップが時計回りにつながる図">
       </div>
     </div>
   </section>
@@ -2130,7 +2066,7 @@ toTopBtn.addEventListener('click', function () {
 
 // ---- スクロール表示アニメーション場所 ----
 // [data-reveal-group] の直下の子要素（[data-reveal]付き）に、表示順で少しずつ遅延を設定。
-// 提携先ロゴやご相談の流れステップが「1つずつ、ゆっくり」現れる動きになります。
+// 提携先ロゴや信頼ポイントカードなどが「1つずつ、ゆっくり」現れる動きになります。
 document.querySelectorAll('[data-reveal-group]').forEach(function (group) {
   var delayStep = parseInt(group.getAttribute('data-reveal-group'), 10) || 90;
   var i = 0;
