@@ -98,6 +98,31 @@ a{color:inherit;text-decoration:none;}
   padding:0 22px;
 }
 
+/* ============================================================
+   スクロールアニメーション追加場所
+   Intersection Observer で要素が画面に入ったタイミングに合わせて
+   [data-reveal] 要素へ .is-visible を付与しています（フェードイン＋わずかな移動のみ。
+   回転・拡大縮小・点滅といった派手な演出は使用していません）。
+   [data-reveal-group] の直下の子要素は、下部scriptで表示順に少しずつ遅延（transition-delay）を
+   自動付与し、「1つずつ自然に現れる」動きにしています。
+   ※このルールをファイル冒頭側に置いているのは、各カード・ボタンのホバー用transform指定が
+   後方の記述として正しく優先される（＝ホバー時にリセットされて動かなくなるのを防ぐ）ためです。 */
+[data-reveal]{
+  opacity:0;
+  transition:opacity .75s cubic-bezier(.2,.6,.2,1), transform .75s cubic-bezier(.2,.6,.2,1);
+  will-change:opacity, transform;
+}
+[data-reveal].is-visible{opacity:1;}
+/* up/left/right：移動を伴うフェードイン */
+[data-reveal="up"]{transform:translateY(26px);}
+[data-reveal="up"].is-visible{transform:none;}
+[data-reveal="left"]{transform:translateX(-34px);}
+[data-reveal="left"].is-visible{transform:none;}
+[data-reveal="right"]{transform:translateX(34px);}
+[data-reveal="right"].is-visible{transform:none;}
+/* fade：transformを一切変更しない（ご相談の流れの矢印・弧の配置など、
+   独自のtransformを既に持つ要素と衝突させないための専用バリエーション） */
+
 /* 見出し共通 */
 .section-head{
   text-align:center;
@@ -1212,6 +1237,103 @@ section.bg-sky{
 .to-top svg{width:18px;height:18px;}
 .to-top.visible{opacity:1;pointer-events:auto;}
 
+/* ---- ヘッダーロゴ縮小場所：スクロールで固定ヘッダーに切り替わる際、ロゴを控えめに縮小 ---- */
+.site-header .logo-plate{transition:transform .35s ease;transform-origin:left center;}
+.site-header.scrolled .logo-plate{transform:scale(0.88);}
+
+/* ---- ファーストビュー表示順アニメーション場所 ----
+   背景 → キャッチコピー → 説明文 → CTAボタン の順に、少しずつ遅れて自然にフェードイン。
+   ページ読み込み時のみの演出のため、スクロールとは連動しない単発アニメーションです。 */
+.hero-bg{
+  opacity:0;
+  animation:heroBgIn 1.6s ease forwards, heroKenBurns 24s ease-in-out 1.6s infinite alternate;
+}
+@keyframes heroBgIn{from{opacity:0;} to{opacity:1;}}
+@keyframes heroKenBurns{from{transform:scale(1);} to{transform:scale(1.06);}}
+
+.hero-badge,
+.hero h1,
+.hero .hero-desc,
+.hero-cta{
+  opacity:0;
+  animation:heroFadeUp .9s cubic-bezier(.2,.6,.2,1) forwards;
+}
+.hero-badge{animation-delay:.5s;}
+.hero h1{animation-delay:.8s;}
+.hero .hero-desc{animation-delay:1.1s;}
+.hero-cta{animation-delay:1.4s;}
+@keyframes heroFadeUp{
+  from{opacity:0;transform:translateY(18px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* ---- 画像のゆっくりとしたKen Burns風ズーム場所 ----
+   選ばれる理由・相談できる内容・代表プロフィール写真に、非常にゆっくりとした拡大の動きを付与。
+   親要素は overflow:hidden のため、拡大してもレイアウトは崩れません。 */
+.reason-visual{overflow:hidden;}
+.reason-visual img,
+.topics-visual img,
+.profile-photo img{
+  animation:kenBurns 22s ease-in-out infinite alternate;
+}
+.topics-visual{overflow:hidden;}
+@keyframes kenBurns{from{transform:scale(1);} to{transform:scale(1.06);}}
+
+/* ---- カードホバー改善場所 ----
+   相談内容カード・提携先ロゴカード・資産運用カード・お問い合わせカードに、
+   「少し浮き上がる＋影が強くなる＋境界線色が変化」の落ち着いたホバー効果を統一的に追加。 */
+.invest-card,
+.service-row,
+.partner-card{
+  transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease, background .2s ease;
+}
+.invest-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 20px 40px rgba(31,78,121,0.16);
+  border-color:var(--primary);
+}
+.service-row:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 30px rgba(31,78,121,0.1);
+  position:relative;
+  z-index:1;
+}
+.partner-card:hover{border-color:var(--primary);}
+
+/* ---- CTAボタンホバー改善場所 ----
+   LINE相談・お問い合わせ・シミュレーションボタンに、浮き上がり＋影の変化を統一的に追加。
+   スマホはホバー状態が発生しないため、タップ時の :active（既存）で押しやすさを維持しています。 */
+.btn{transition:transform .25s ease, box-shadow .25s ease, opacity .15s ease, background .25s ease;}
+.btn-line:hover,
+.btn-line:focus-visible{
+  transform:translateY(-2px);
+  box-shadow:0 14px 28px rgba(6,199,85,0.4);
+  background:#05b34c;
+}
+.btn-tel:hover{transform:translateY(-2px);}
+.btn-mail:hover,
+.btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 28px rgba(15,39,71,0.3);
+}
+.contact-icon-link:hover,
+.contact-icon-link:focus-visible{
+  box-shadow:0 14px 28px rgba(0,0,0,0.18);
+}
+
+/* 動きを控えたい方（OS設定）への配慮：アニメーション・トランジションをほぼ無効化 */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  [data-reveal]{opacity:1 !important;}
+  [data-reveal="up"],[data-reveal="left"],[data-reveal="right"]{transform:none !important;}
+  .hero-bg,.hero-badge,.hero h1,.hero .hero-desc,.hero-cta{opacity:1 !important;}
+}
+
 /* ============================================================
    レスポンシブ：タブレット以上
 ============================================================ */
@@ -1414,35 +1536,36 @@ section.bg-sky{
 
     <div class="container">
       <div class="reason-content">
-        <div class="section-head">
+        <div class="section-head" data-reveal="up">
           <span class="en-label">WHY SAKIMORI</span>
           <h2>未来を見据えた、確かなパートナーとして。</h2>
           <p class="lead">お客様一人ひとりの人生に寄り添い、安心できる未来づくりをサポートします。</p>
         </div>
 
-        <div class="reason-points">
-          <div class="reason-point">
+        <!-- セクション表示アニメーション場所：選ばれる理由の4項目を1つずつ遅れてフェードイン -->
+        <div class="reason-points" data-reveal-group="100">
+          <div class="reason-point" data-reveal="up">
             <div class="icon-badge gold">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/><path d="M9.5 12l1.8 1.8L15 10.2"/></svg>
             </div>
             <h3>元自衛官の誠実さ</h3>
             <p>規律と責任感を大切に、お客様の人生設計に真摯に向き合います。</p>
           </div>
-          <div class="reason-point">
+          <div class="reason-point" data-reveal="up">
             <div class="icon-badge">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.3a3 3 0 0 1 0 5.8"/><path d="M21 20c0-2.6-1.7-4.8-4-5.6"/></svg>
             </div>
             <h3>一人ひとりに寄り添う提案</h3>
             <p>ご家族の状況や目標に合わせて、最適なプランを一緒に考えます。</p>
           </div>
-          <div class="reason-point">
+          <div class="reason-point" data-reveal="up">
             <div class="icon-badge green">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
             </div>
             <h3>総合的なサポート</h3>
             <p>保険・資産形成・不動産など、幅広い視点から最適な選択をサポートします。</p>
           </div>
-          <div class="reason-point">
+          <div class="reason-point" data-reveal="up">
             <div class="icon-badge">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="12" r="6.5"/><circle cx="15" cy="12" r="6.5"/></svg>
             </div>
@@ -1461,36 +1584,37 @@ section.bg-sky{
   ============================================================ -->
   <section id="invest" class="bg-sky">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head" data-reveal="up">
         <span class="en-label">ASSET MANAGEMENT</span>
         <h2>資産運用相談について</h2>
       </div>
 
+      <!-- セクション表示アニメーション場所：写真は左から、説明文は右からスライド表示 -->
       <div class="invest-intro-row">
-        <div class="invest-photo">
+        <div class="invest-photo" data-reveal="left">
           <img src="images/photo-family.jpg" alt="家族と将来の安心を表す写真">
         </div>
-        <p class="invest-intro">
+        <p class="invest-intro" data-reveal="right">
           「何から始めればいいかわからない」という状態も、ご相談のスタートラインです。SAKIMORIでは、目先の商品選びではなく、人生設計全体から逆算した資産形成をご提案します。
         </p>
       </div>
 
-      <div class="invest-grid">
-        <div class="invest-card">
+      <div class="invest-grid" data-reveal-group="110">
+        <div class="invest-card" data-reveal="up">
           <div class="icon-badge">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-1-7-4.5-7-9V6l7-3 7 3v6c0 4.5-3 8-7 9z"/><path d="M9.5 12l1.8 1.8L15 10.2"/></svg>
           </div>
           <h3>将来のお金の不安を整理できる</h3>
           <p>漠然とした不安を、家計・保障・資産の3つの観点から可視化し、優先順位をつけて整理します。</p>
         </div>
-        <div class="invest-card">
+        <div class="invest-card" data-reveal="up">
           <div class="icon-badge">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
           </div>
           <h3>投資初心者でも安心して相談できる</h3>
           <p>NISA・iDeCoといった制度の仕組みから、専門用語を使わずわかりやすくご説明します。</p>
         </div>
-        <div class="invest-card">
+        <div class="invest-card" data-reveal="up">
           <div class="icon-badge">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
           </div>
@@ -1502,7 +1626,7 @@ section.bg-sky{
       <!-- CTAボタン変更場所：「資産運用について相談する」ボタンは削除（LINE相談・お問い合わせへ導線を統一） -->
 
       <!-- 金融庁 資産運用シミュレーターへの導線（外部リンク／新しいタブで開きます） -->
-      <div class="fsa-tool">
+      <div class="fsa-tool" data-reveal="up">
         <span class="fsa-tool-eyebrow">FREE SIMULATOR</span>
         <p class="fsa-tool-title">3秒でわかる、<br>未来のお金シミュレーション</p>
         <p class="fsa-tool-desc">金融庁の資産運用シミュレーターで、将来の資金計画を無料で確認できます。</p>
@@ -1519,7 +1643,7 @@ section.bg-sky{
   ============================================================ -->
   <section id="topics">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head" data-reveal="up">
         <span class="en-label">CONSULTING SERVICES</span>
         <h2>ご相談いただける内容</h2>
         <p class="lead">人生のお金に関する不安や疑問を、一人ひとりに合わせて一緒に整理します。</p>
@@ -1527,7 +1651,8 @@ section.bg-sky{
 
       <div class="topics-layout">
         <!-- ---- 「ご相談いただける内容」写真差替え場所：images/beach.jpg ---- -->
-        <div class="topics-visual">
+        <!-- セクション表示アニメーション場所：写真は左からスライド表示 -->
+        <div class="topics-visual" data-reveal="left">
           <img src="images/beach.jpg" alt="大切な人と過ごす、穏やかな未来を表す写真">
           <div class="topics-visual-overlay"></div>
           <div class="topics-visual-caption">
@@ -1535,8 +1660,8 @@ section.bg-sky{
           </div>
         </div>
 
-        <div class="topics-list">
-          <div class="service-row">
+        <div class="topics-list" data-reveal-group="90">
+          <div class="service-row" data-reveal="right">
             <div class="icon-badge">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-1-7-4.5-7-9V6l7-3 7 3v6c0 4.5-3 8-7 9z"/></svg>
             </div>
@@ -1546,7 +1671,7 @@ section.bg-sky{
             </div>
           </div>
 
-          <div class="service-row">
+          <div class="service-row" data-reveal="right">
             <div class="icon-badge green">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 1 9 9H3a9 9 0 0 1 9-9z"/><path d="M12 12v7a2 2 0 0 1-4 0"/></svg>
             </div>
@@ -1556,7 +1681,7 @@ section.bg-sky{
             </div>
           </div>
 
-          <div class="service-row">
+          <div class="service-row" data-reveal="right">
             <div class="icon-badge">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
             </div>
@@ -1566,7 +1691,7 @@ section.bg-sky{
             </div>
           </div>
 
-          <div class="service-row">
+          <div class="service-row" data-reveal="right">
             <div class="icon-badge green">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-6h6v6"/></svg>
             </div>
@@ -1576,7 +1701,7 @@ section.bg-sky{
             </div>
           </div>
 
-          <div class="service-row">
+          <div class="service-row" data-reveal="right">
             <div class="icon-badge">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20l-5-2V4l5 2 6-2 5 2v14l-5-2-6 2z"/><path d="M9 6v14M15 4v14"/></svg>
             </div>
@@ -1595,7 +1720,7 @@ section.bg-sky{
   ============================================================ -->
   <section id="partners" class="bg-pale">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head" data-reveal="up">
         <span class="en-label">OUR PARTNERS</span>
         <h2>提携先保険会社一覧</h2>
         <p class="lead">多数の保険会社と提携しているからこそ、お客様に合わせた最適なご提案が可能です。</p>
@@ -1606,20 +1731,21 @@ section.bg-sky{
       <!-- 提携先保険会社並び順変更場所：あいうえお順に並び替え。
            同一グループ（MS&AD／アクサ）は生保→損保の順で隣接配置しています。
            アクサ生命保険株式会社→アクサ生命に表記を簡素化。 -->
-      <div class="partners-grid">
-        <div class="partner-card"><div class="logo-box"><img src="images/aioilife.jpeg" alt="三井住友海上あいおい生命"></div><span>三井住友海上あいおい生命</span></div>
-        <div class="partner-card"><div class="logo-box"><img src="images/aioi.jpeg" alt="あいおいニッセイ同和損保"></div><span>あいおいニッセイ同和損保</span></div>
+      <!-- セクション表示アニメーション場所：1社ずつ少し遅れてフェードイン（信頼感のあるゆっくりした表示） -->
+      <div class="partners-grid" data-reveal-group="80">
+        <div class="partner-card" data-reveal="up"><div class="logo-box"><img src="images/aioilife.jpeg" alt="三井住友海上あいおい生命"></div><span>三井住友海上あいおい生命</span></div>
+        <div class="partner-card" data-reveal="up"><div class="logo-box"><img src="images/aioi.jpeg" alt="あいおいニッセイ同和損保"></div><span>あいおいニッセイ同和損保</span></div>
         <!-- アクサ生命ロゴ修正場所：黒い外枠のない修正版ロゴ（images/axalife.jpeg）に差し替え -->
-        <div class="partner-card"><div class="logo-box"><img src="images/axalife.jpeg" alt="アクサ生命"></div><span>アクサ生命</span></div>
-        <div class="partner-card"><div class="logo-box"><img src="images/axa.jpeg" alt="アクサダイレクト"></div><span>アクサダイレクト</span></div>
-        <div class="partner-card"><div class="logo-box"><img src="images/fwd.jpeg" alt="FWD生命"></div><span>FWD生命</span></div>
-        <div class="partner-card"><div class="logo-box"><img src="images/orix.jpeg" alt="オリックス生命"></div><span>オリックス生命</span></div>
-        <div class="partner-card"><div class="logo-box"><img src="images/sompo.jpeg" alt="ＳＯＭＰＯひまわり生命"></div><span>ＳＯＭＰＯひまわり生命</span></div>
-        <div class="partner-card"><div class="logo-box"><img src="images/daiichi.jpg" alt="第一ネオ生命保険株式会社"></div><span>第一ネオ生命保険株式会社</span></div>
-        <div class="partner-card"><div class="logo-box"><img src="images/zurich.jpeg" alt="チューリッヒ生命"></div><span>チューリッヒ生命</span></div>
-        <div class="partner-card"><div class="logo-box"><img src="images/tokyokaijo.jpg" alt="東京海上日動／東京海上日動あんしん生命"></div><span>東京海上日動／東京海上日動あんしん生命</span></div>
-        <div class="partner-card"><div class="logo-box"><img src="images/nissei.jpeg" alt="日本生命保険相互会社"></div><span>日本生命保険相互会社</span></div>
-        <div class="partner-card"><div class="logo-box"><img src="images/hanasaku.jpeg" alt="はなさく生命保険"></div><span>はなさく生命保険</span></div>
+        <div class="partner-card" data-reveal="up"><div class="logo-box"><img src="images/axalife.jpeg" alt="アクサ生命"></div><span>アクサ生命</span></div>
+        <div class="partner-card" data-reveal="up"><div class="logo-box"><img src="images/axa.jpeg" alt="アクサダイレクト"></div><span>アクサダイレクト</span></div>
+        <div class="partner-card" data-reveal="up"><div class="logo-box"><img src="images/fwd.jpeg" alt="FWD生命"></div><span>FWD生命</span></div>
+        <div class="partner-card" data-reveal="up"><div class="logo-box"><img src="images/orix.jpeg" alt="オリックス生命"></div><span>オリックス生命</span></div>
+        <div class="partner-card" data-reveal="up"><div class="logo-box"><img src="images/sompo.jpeg" alt="ＳＯＭＰＯひまわり生命"></div><span>ＳＯＭＰＯひまわり生命</span></div>
+        <div class="partner-card" data-reveal="up"><div class="logo-box"><img src="images/daiichi.jpg" alt="第一ネオ生命保険株式会社"></div><span>第一ネオ生命保険株式会社</span></div>
+        <div class="partner-card" data-reveal="up"><div class="logo-box"><img src="images/zurich.jpeg" alt="チューリッヒ生命"></div><span>チューリッヒ生命</span></div>
+        <div class="partner-card" data-reveal="up"><div class="logo-box"><img src="images/tokyokaijo.jpg" alt="東京海上日動／東京海上日動あんしん生命"></div><span>東京海上日動／東京海上日動あんしん生命</span></div>
+        <div class="partner-card" data-reveal="up"><div class="logo-box"><img src="images/nissei.jpeg" alt="日本生命保険相互会社"></div><span>日本生命保険相互会社</span></div>
+        <div class="partner-card" data-reveal="up"><div class="logo-box"><img src="images/hanasaku.jpeg" alt="はなさく生命保険"></div><span>はなさく生命保険</span></div>
       </div>
     </div>
   </section>
@@ -1629,14 +1755,15 @@ section.bg-sky{
   ============================================================ -->
   <section id="profile" class="bg-profile">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head" data-reveal="up">
         <span class="en-label">REPRESENTATIVE</span>
         <h2>代表プロフィール</h2>
         <p class="lead">現場で「備え」の重さを知る一人として、皆さまと向き合っています。</p>
       </div>
 
+      <!-- セクション表示アニメーション場所：写真は左から、プロフィール文は右からスライド表示 -->
       <div class="profile-layout">
-        <div class="profile-card">
+        <div class="profile-card" data-reveal="left">
           <!-- 代表プロフィール写真変更場所：現在 images/representative-main.jpg（スーツ姿）を使用中 -->
           <div class="profile-photo">
             <img src="images/representative-main.jpg" alt="代表取締役 渡辺琢哉" style="object-position:center 42%;"
@@ -1655,7 +1782,7 @@ section.bg-sky{
           </div>
         </div>
 
-        <div class="profile-text-panel">
+        <div class="profile-text-panel" data-reveal="right">
           <div class="profile-badges">
             <span>元自衛官</span>
             <span>金融セミナー講師</span>
@@ -1685,14 +1812,15 @@ section.bg-sky{
       <!-- ご相談の流れレイアウト変更場所：画像1枚（テキスト埋め込み）表示だと
            スマホで文字が潰れて読めなくなるため廃止し、HTML/CSSによる5ステップ表示に変更。
            PCでは緩やかな弧を描く時計回りの配置、スマホでは1項目ずつ大きく縦に並ぶ構成にしています。 -->
-      <div class="section-head">
+      <div class="section-head" data-reveal="up">
         <span class="en-label">FLOW</span>
         <h2>ご相談の流れ</h2>
         <p class="lead">初めての方でも安心してご相談いただけるよう、丁寧にサポートいたします。</p>
       </div>
 
-      <div class="flow-roadmap">
-        <div class="flow-step">
+      <!-- セクション表示アニメーション場所：1→2→3→4→5の順に表示。矢印にも控えめなフェードインを付与し、流れを感じられるように -->
+      <div class="flow-roadmap" data-reveal-group="180">
+        <div class="flow-step" data-reveal="fade">
           <span class="flow-step-num">01</span>
           <div class="flow-step-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.4 8.4 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.8a8.4 8.4 0 0 1-.9-3.8A8.4 8.4 0 0 1 12.5 3h.1a8.4 8.4 0 0 1 8.4 8.4z"/></svg>
@@ -1701,11 +1829,11 @@ section.bg-sky{
           <p>お電話・LINE・お問い合わせフォームからお気軽にご連絡ください。</p>
         </div>
 
-        <div class="flow-arrow">
+        <div class="flow-arrow" data-reveal="fade">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
         </div>
 
-        <div class="flow-step">
+        <div class="flow-step" data-reveal="fade">
           <span class="flow-step-num">02</span>
           <div class="flow-step-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
@@ -1714,11 +1842,11 @@ section.bg-sky{
           <p>ご都合の良い日時を調整し、面談の日程を決定します。（オンライン対応も可能です）</p>
         </div>
 
-        <div class="flow-arrow">
+        <div class="flow-arrow" data-reveal="fade">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
         </div>
 
-        <div class="flow-step">
+        <div class="flow-step" data-reveal="fade">
           <span class="flow-step-num">03</span>
           <div class="flow-step-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.3a3 3 0 0 1 0 5.8"/><path d="M21 20c0-2.6-1.7-4.8-4-5.6"/></svg>
@@ -1727,11 +1855,11 @@ section.bg-sky{
           <p>現在の状況や将来の目標、不安や疑問を丁寧にお伺いします。</p>
         </div>
 
-        <div class="flow-arrow">
+        <div class="flow-arrow" data-reveal="fade">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
         </div>
 
-        <div class="flow-step">
+        <div class="flow-step" data-reveal="fade">
           <span class="flow-step-num">04</span>
           <div class="flow-step-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
@@ -1740,11 +1868,11 @@ section.bg-sky{
           <p>お客様一人ひとりに合わせた最適なプランをご提案いたします。</p>
         </div>
 
-        <div class="flow-arrow">
+        <div class="flow-arrow" data-reveal="fade">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
         </div>
 
-        <div class="flow-step">
+        <div class="flow-step" data-reveal="fade">
           <span class="flow-step-num">05</span>
           <div class="flow-step-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/><path d="M9.5 12l1.8 1.8L15 10.2"/></svg>
@@ -1761,14 +1889,15 @@ section.bg-sky{
   ============================================================ -->
   <section id="contact" class="contact-section">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head" data-reveal="up">
         <span class="en-label">CONTACT</span>
         <h2>まずはお気軽にご相談ください</h2>
         <p class="lead">相談だけでも歓迎です。ご都合の良い方法でお問い合わせください。</p>
       </div>
 
+      <!-- セクション表示アニメーション場所：連絡先カードは左から、フォームは右からスライド表示 -->
       <div class="contact-layout">
-        <div>
+        <div data-reveal="left">
           <!-- LINE相談案内変更場所：相談方法3項目のテキストを簡潔化（返信目安の記載を削除、電話受付時間を17:00までに変更） -->
           <div class="contact-cta-box">
             <h3>LINEなら、<br>最短で気軽に相談できます</h3>
@@ -1799,21 +1928,21 @@ section.bg-sky{
           <!-- 選ばれる理由画像カード変更場所：3項目とも images/強引な勧誘はしません.jpeg から
                切り出した画像タイルに統一（アイコン・タイトル・説明文を1枚の画像として使用）。
                画像はそのまま切り出しただけで加工は行わず、3枚とも同じ大きさ・比率・余白で表示しています。 -->
-          <div class="promise-band">
-            <div class="promise-mini">
+          <div class="promise-band" data-reveal-group="100">
+            <div class="promise-mini" data-reveal="up">
               <img src="images/promise-no-pressure-tile.jpg" alt="強引な勧誘はいたしません。ご自身のペースでご検討いただけます。">
             </div>
-            <div class="promise-mini">
+            <div class="promise-mini" data-reveal="up">
               <img src="images/promise-integrity-tile.jpg" alt="元自衛官による誠実なサポート。規律と責任感を大切に、丁寧に対応いたします。">
             </div>
-            <div class="promise-mini">
+            <div class="promise-mini" data-reveal="up">
               <img src="images/promise-partner-tile.jpg" alt="長期的なパートナー。一度きりではなく、長くお付き合いできる関係を大切にしています。">
             </div>
           </div>
         </div>
 
         <!-- 問い合わせフォーム -->
-        <div class="form-wrap">
+        <div class="form-wrap" data-reveal="right">
           <h3>フォームからのお問い合わせ</h3>
           <p class="form-sub">下記フォームにご記入のうえ送信してください。担当者より折り返しご連絡いたします。</p>
 
@@ -1998,6 +2127,38 @@ window.addEventListener('scroll', function () {
 toTopBtn.addEventListener('click', function () {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+// ---- スクロール表示アニメーション場所 ----
+// [data-reveal-group] の直下の子要素（[data-reveal]付き）に、表示順で少しずつ遅延を設定。
+// 提携先ロゴやご相談の流れステップが「1つずつ、ゆっくり」現れる動きになります。
+document.querySelectorAll('[data-reveal-group]').forEach(function (group) {
+  var delayStep = parseInt(group.getAttribute('data-reveal-group'), 10) || 90;
+  var i = 0;
+  Array.from(group.children).forEach(function (child) {
+    if (child.hasAttribute('data-reveal')) {
+      child.style.transitionDelay = Math.min(i * delayStep, 900) + 'ms';
+      i++;
+    }
+  });
+});
+
+// Intersection Observer で、画面に入った要素だけ表示状態（.is-visible）にする。
+// 一度表示された要素は監視を解除し、再アニメーションはしません。
+var revealTargets = document.querySelectorAll('[data-reveal]');
+if ('IntersectionObserver' in window) {
+  var revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+  revealTargets.forEach(function (el) { revealObserver.observe(el); });
+} else {
+  // 非対応ブラウザでは、最初から表示状態にしておく（フォールバック）
+  revealTargets.forEach(function (el) { el.classList.add('is-visible'); });
+}
 
 // お問い合わせフォーム送信処理（デモ：実送信先が決まり次第、fetch部分を実装してください）
 const contactForm = document.getElementById('contact-form');
